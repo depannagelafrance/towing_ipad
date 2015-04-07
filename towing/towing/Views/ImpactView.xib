@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImpactViewController">
+            <connections>
+                <outlet property="drawableView" destination="6PK-nd-X5Y" id="wie-a1-zAN"/>
+                <outlet property="view" destination="iN0-l3-epB" id="kBp-U5-SMW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZE-ya-f37">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <subviews>
+                        <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vty-g5-igc">
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                            <items>
+                                <navigationItem title="Schade voertuig" id="PSm-wv-5my">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="trash" id="i98-7V-UgR">
+                                        <connections>
+                                            <action selector="erasAction:" destination="-1" id="0Zv-C0-EFK"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" systemItem="done" id="CgZ-j0-IFH">
+                                        <connections>
+                                            <action selector="doneAction:" destination="-1" id="eQ8-Mi-No9"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PK-nd-X5Y" customClass="ImpactDrawableView">
+                            <rect key="frame" x="8" y="50" width="752" height="966"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.25882352939999997" green="0.71764705880000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="6PK-nd-X5Y" firstAttribute="top" secondItem="vty-g5-igc" secondAttribute="bottom" constant="6" id="Df8-1t-TBF"/>
+                        <constraint firstItem="6PK-nd-X5Y" firstAttribute="top" secondItem="sZE-ya-f37" secondAttribute="top" constant="50" id="EhK-ti-5OR"/>
+                        <constraint firstItem="6PK-nd-X5Y" firstAttribute="bottom" secondItem="sZE-ya-f37" secondAttribute="bottomMargin" id="Jje-H4-d0i"/>
+                        <constraint firstItem="6PK-nd-X5Y" firstAttribute="leading" secondItem="sZE-ya-f37" secondAttribute="leadingMargin" id="Mzn-9u-RT2"/>
+                        <constraint firstItem="vty-g5-igc" firstAttribute="leading" secondItem="sZE-ya-f37" secondAttribute="leading" id="fB6-0A-Rfb"/>
+                        <constraint firstItem="vty-g5-igc" firstAttribute="centerX" secondItem="6PK-nd-X5Y" secondAttribute="centerX" id="miu-TU-kKg"/>
+                        <constraint firstItem="6PK-nd-X5Y" firstAttribute="trailing" secondItem="sZE-ya-f37" secondAttribute="trailingMargin" id="saT-3o-6Bj"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="sZE-ya-f37" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JGS-du-ujS"/>
+                <constraint firstItem="sZE-ya-f37" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Une-QA-QgF"/>
+                <constraint firstAttribute="bottom" secondItem="sZE-ya-f37" secondAttribute="bottom" id="anE-7j-W9U"/>
+                <constraint firstAttribute="trailing" secondItem="sZE-ya-f37" secondAttribute="trailing" id="eOm-Lj-sTx"/>
+            </constraints>
+            <point key="canvasLocation" x="556" y="389"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

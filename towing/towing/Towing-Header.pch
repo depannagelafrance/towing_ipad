@@ -1,0 +1,132 @@
+//
+//  Towing-Header.pch
+//  towing
+//
+//  Created by Kris Vandermast on 28/11/14.
+//  Copyright (c) 2014 Depannage La France. All rights reserved.
+//
+
+#ifndef towing_Towing_Header_pch
+#define towing_Towing_Header_pch
+
+#if DEBUG
+#define DLog(format, ...) NSLog((format), ## __VA_ARGS__)
+#else
+#define DLog(format, ...)
+#endif
+
+// -------------------------- API --------------------------
+#define BASE_URL @"https://api.towing.be"
+//#define BASE_URL @"http://localhost:8443"
+
+#define NEW_VOUCHERS_API                    @"/dossier/list/me/%@"
+#define DOSSIER_BY_ID                       @"/dossier/%@/%@"
+#define NEW_VOUCHER_FOR_DOSSIER_API         @"/dossier/voucher/%@/%@"
+#define REMOVE_ACTIVITY_FROM_VOUCHER_API    @"/dossier/voucher/%@/activity/%@/%@"
+#define API_IDLE_RIDE               @"/dossier/voucher/idle/%@/%@"
+
+#define NOTIFICATION_PURGE_DOSSIERS             @"PURGE_DOSSIERS"
+#define NOTIFICATION_DIRECTIONS_UPDATED         @"DIRECTIONS_UPDATED"
+#define NOTIFICATION_UPDATE_VOUCHER_OVERVIEW    @"UPDATE_VOUCHER_OVERVIEW"
+#define NOTIFICATION_UPDATE_TOWING              @"UPDATE_TOWING"
+
+// ----------------------- ENTITIES -----------------------
+#define DOSSIER_ENTITY                  @"Dossier"
+#define USER_ENTITY                     @"User"
+#define TIMEFRAME_ENTITY                @"Timeframe"
+#define TIMEFRAME_ACTIVITY_ENTITY       @"TimeframeActivity"
+#define TIMEFRAME_ACTIVITY_FEE_ENTITY   @"TimeframeActivityFee"
+#define TOWING_VOUCHER_ENTITY           @"TowingVoucher"
+#define TOWING_VOUCHER_SIGNATURE        @"TowingVoucherSignature"
+#define TOWING_MESSAGE                  @"TowingMessage"
+#define TRAFFICPOST_ENTITY              @"TrafficPost"
+#define LICENCE_PLATE_COUNTRY_ENTITY    @"LicencePlateCountry"
+#define TRAFFIC_LANE_ENTITY             @"TrafficLane"
+#define VEHICLE_ENTITY                  @"Vehicle"
+
+
+// ----------------------- NOTIFICATION KEYS -----------------------
+#define ACTION_NEW_TOWING_VOUCHER_ASSIGNED      @"NEW_TOWING_VOUCHER_ASSIGNED"
+#define META_NOTIFICATION_TYPE_POLICE           @"police"
+#define META_NOTIFICATION_TYPE_CAUSER           @"causer"
+#define META_NOTIFICATION_TYPE_COLLECTOR        @"collector"
+
+// ----------------------- JSON KEYS -----------------------
+
+#define TRAFFIC_POST_NAME       @"traffic_post_name"
+#define TRAFFIC_POST_ID         @"police_traffic_post_id"
+#define SIGNA_ARRIVAL           @"signa_arrival"
+#define TOWING_ARRIVAL          @"towing_arrival"
+#define TOWING_START            @"towing_start"
+#define TOWING_END              @"towing_completed"
+#define TOWING_CALLED           @"towing_called"
+#define ID                      @"id"
+#define NAME                    @"name"
+#define STREET                  @"street"
+#define NUMBER                  @"street_number"
+#define POBOX                   @"street_pobox"
+#define ZIP                     @"zip"
+#define CITY                    @"city"
+#define DEPOT                   @"depot"
+#define TOWING_ACTIVITIES       @"towing_activities"
+#define ACTIVITY_ID             @"activity_id"
+#define TIMEFRAME_ACTIVITY_ID   @"timeframe_activity_id"
+#define AMOUNT                  @"amount"
+#define CAL_FEE_EXCL_VAT        @"cal_fee_excl_vat"
+#define CAL_FEE_INCL_VAT        @"cal_fee_incl_vat"
+#define CODE                    @"code"
+#define FEE_EXCL_VAT            @"fee_excl_vat"
+#define FEE_INCL_VAT            @"fee_incl_vat"
+#define TOWING_VOUCHER_ID       @"towing_voucher_id"
+#define TOWED_BY                @"towed_by"
+#define TOWED_BY_VEHICLE        @"towed_by_vehicle"
+#define TOWING_VEHICLE_ID       @"towing_vehicle_id"
+#define TOWING_ID               @"towing_id"
+#define LICENCE_PLATE_COUNTRY   @"vehicule_country"
+#define VEHICULE                @"vehicule"
+#define VEHICULE_COLOR          @"vehicule_color"
+#define VEHICULE_KEYS_PRESENT   @"vehicule_keys_present"
+#define VEHICULE_TYPE           @"vehicule_type"
+#define VEHICULE_LICENCE_PLATE  @"vehicule_licenceplate"
+#define VEHICULE_IMPACT_REMARKS @"vehicule_impact_remarks"
+#define ADDITIONAL_INFO         @"additional_info"
+#define CIC                     @"cic"
+#define ALLOTMENT_DIRECTION_ID  @"direction_id"
+#define ALLOTMENT_DIRECTION_INDICATOR_ID @"indicator_id"
+#define TRAFFIC_LANES           @"traffic_lanes"
+#define TRAFFIC_LANES_NAME      @"traffic_lane_name"
+#define VOUCHER_ID              @"voucher_id"
+#define DOSSIER_ID              @"dossier_id"
+#define TYPE                    @"type"
+#define LICENCE_PLATE           @"licence_plate"
+
+// TRANSLATIONS
+#define ALERT_ERROR_TITLE       @"Fout"
+#define ALERT_BUTTON_OK         @"OK"
+#define ALERT_TITLE_ERROR       @"Fout"
+#define ALERT_BUTTON_CANCEL     @"Annuleren"
+
+#define ALERT_TITLE_IDLE_RIDE               @"Loze Rit"
+#define ALERT_TITLE_TOWING_END              @"Afronden takelwerkzaamheden"
+#define ALERT_TITLE_REQUEST_NEW_VOUCHER     @"Aanvraag nieuwe takelbon"
+#define ALERT_MESSAGE_IDLE_RIDE             @"Bent u zeker dat u deze takelbon wil markeren als loze rit? Dit kan niet ongedaan gemaakt worden."
+#define ALERT_MESSAGE_TOWING_END            @"Bent u zeker dat u deze takelbon wil afronden? Dit kan niet ongedaan gemaakt worden en u kan deze bon NIET meer wijzigen!"
+#define ALERT_MESSAGE_REQUEST_NEW_VOUCHER   @"Bent u zeker dat u een nieuwe takelbon wenst aan te vragen?"
+
+#define BUTTON_TITLE_UNKNOWN                        @"Onbekend"
+#define BUTTON_TRAFFIC_LANES_NONE                   @"Geen verkeersstroken geselecteerd"
+#define BUTTON_LABEL_SELECT_DIRECTION               @"Selecteer een richting"
+#define BUTTON_LABEL_SELECT_DIRECTION_INDICATOR     @"Selecteer een KM Paal"
+
+#define VIEW_TITLE_INCIDENT_DETAIL      @"Incident detail (%@)"
+#define VIEW_TITLE_SIGNATURE_COLLECTOR  @"Handtekening - Afhaler"
+#define VIEW_TITLE_SIGNATURE_POLICE     @"Hantekening - Verkeerspost"
+#define VIEW_TITLE_SIGNATURE_CAUSER     @"Handtekening - Hinderverwekker"
+#define VIEW_TITLE_VEHICLE_DETAIL       @"Voertuig"
+
+// CURRENCY FORMATTING
+#define FORMAT_CURRENCY             @"%.2f €"
+
+#define ERROR_DOMAIN_CONNECTION         @"ConnectionError"
+#define ERROR_DOMAIN_CONNECTION_CODE    -101
+#endif

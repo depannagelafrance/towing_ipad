@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AllotmentDirection" representedClassName="AllotmentDirection" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="indicators" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AllotmentDirectionIndicator" inverseName="direction" inverseEntity="AllotmentDirectionIndicator" syncable="YES"/>
+    </entity>
+    <entity name="AllotmentDirectionIndicator" representedClassName="AllotmentDirectionIndicator" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="direction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AllotmentDirection" inverseName="indicators" inverseEntity="AllotmentDirection" syncable="YES"/>
+    </entity>
+    <entity name="Dossier" representedClassName="Dossier" syncable="YES">
+        <attribute name="allotment_direction_indicator_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="allotment_direction_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="allotment_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="call_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="call_number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dossier_number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasBeenSynchd" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="incident_type_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="json" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="traffic_lane_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="towing_vouchers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TowingVoucher" inverseName="dossier" inverseEntity="TowingVoucher" syncable="YES"/>
+    </entity>
+    <entity name="LicencePlateCountry" representedClassName="LicencePlateCountry" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Timeframe" representedClassName="Timeframe" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="TimeframeActivity" representedClassName="TimeframeActivity" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="TimeframeActivityFee" representedClassName="TimeframeActivityFee" syncable="YES">
+        <attribute name="fee_excl_vat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fee_incl_vat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="timeframe_activity_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="timeframe_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="TowingActivity" representedClassName="TowingActivity" syncable="YES">
+        <relationship name="towing_voucher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowingVoucher" inverseName="towing_activities" inverseEntity="TowingVoucher" syncable="YES"/>
+    </entity>
+    <entity name="TowingMessage" representedClassName="TowingMessage" syncable="YES">
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="towingVoucher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowingVoucher" inverseName="towing_messages" inverseEntity="TowingVoucher" syncable="YES"/>
+    </entity>
+    <entity name="TowingVoucher" representedClassName="TowingVoucher" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="impact_image_path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="signa_arrival" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="signa_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="signa_by_vehicule" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="towed_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="towed_by_vehicule" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="towing_arrival" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="towing_called" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="towing_completed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="towing_depot" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="towing_start" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="vehicule_country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vehicule_licenceplate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vehicule_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="voucher_number" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dossier" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dossier" inverseName="towing_vouchers" inverseEntity="Dossier" syncable="YES"/>
+        <relationship name="signature_causer" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TowingVoucherSignature" inverseName="towingVoucher" inverseEntity="TowingVoucherSignature" syncable="YES"/>
+        <relationship name="signature_traffic_post" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TowingVoucherSignature" inverseName="towingVoucherTrafficPost" inverseEntity="TowingVoucherSignature" syncable="YES"/>
+        <relationship name="towing_activities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TowingActivity" inverseName="towing_voucher" inverseEntity="TowingActivity" syncable="YES"/>
+        <relationship name="towing_messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TowingMessage" inverseName="towingVoucher" inverseEntity="TowingMessage" syncable="YES"/>
+        <relationship name="towing_vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="vehicleAsTowing" inverseEntity="Vehicle" syncable="YES"/>
+    </entity>
+    <entity name="TowingVoucherSignature" representedClassName="TowingVoucherSignature" syncable="YES">
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="towingVoucher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowingVoucher" inverseName="signature_causer" inverseEntity="TowingVoucher" syncable="YES"/>
+        <relationship name="towingVoucherTrafficPost" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowingVoucher" inverseName="signature_traffic_post" inverseEntity="TowingVoucher" syncable="YES"/>
+    </entity>
+    <entity name="TrafficLane" representedClassName="TrafficLane" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="TrafficPost" representedClassName="TrafficPost" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="first_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="json" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="last_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="signature_path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="licence_plate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="vehicleAsTowing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowingVoucher" inverseName="towing_vehicle" inverseEntity="TowingVoucher" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AllotmentDirection" positionX="-36" positionY="135" width="128" height="88"/>
+        <element name="AllotmentDirectionIndicator" positionX="-27" positionY="144" width="128" height="88"/>
+        <element name="Dossier" positionX="-54" positionY="27" width="128" height="225"/>
+        <element name="LicencePlateCountry" positionX="-36" positionY="135" width="128" height="75"/>
+        <element name="Timeframe" positionX="-36" positionY="135" width="128" height="75"/>
+        <element name="TimeframeActivity" positionX="-27" positionY="144" width="128" height="90"/>
+        <element name="TimeframeActivityFee" positionX="-36" positionY="135" width="128" height="120"/>
+        <element name="TowingActivity" positionX="-18" positionY="162" width="128" height="60"/>
+        <element name="TowingMessage" positionX="-36" positionY="135" width="128" height="73"/>
+        <element name="TowingVoucher" positionX="-36" positionY="81" width="128" height="375"/>
+        <element name="TowingVoucherSignature" positionX="-36" positionY="135" width="128" height="88"/>
+        <element name="TrafficLane" positionX="-18" positionY="153" width="128" height="73"/>
+        <element name="TrafficPost" positionX="-36" positionY="135" width="128" height="73"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Vehicle" positionX="-36" positionY="135" width="128" height="103"/>
+    </elements>
+</model>
