@@ -38,7 +38,7 @@
     UILabel *labelCallNumberVal;
     UILabel *labelCallTimeVal;
 }
-@property (strong, nonatomic) AppDelegate *delegate;
+@property (readonly, strong, nonatomic) AppDelegate *delegate;
 @end
 
 @implementation MenuTableViewController
@@ -46,11 +46,7 @@
 #pragma mark - Getters
 - (AppDelegate *) delegate
 {
-    if(!_delegate) {
-        _delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    }
-    
-    return _delegate;
+    return (AppDelegate *) [[UIApplication sharedApplication] delegate];
 }
 
 #pragma mark - Life cycle
@@ -127,7 +123,7 @@
     [labelIndicatorVal setAdjustsFontSizeToFitWidth:YES];
     [labelIncidentTypeVal setAdjustsFontSizeToFitWidth:YES];
     
-
+    
     [labelDirection setText:@"Richting: "];
     [labelIndicator setText:@"KM Paal: "];
     [labelTrafficLane setText:@"Rijvak: "];
@@ -220,7 +216,7 @@
         else if ([cell.reuseIdentifier isEqualToString:@"VehicleDetail"]) {
             viewController = [[VehicleDetailViewController alloc] initWithNibName:@"VehicleDetail" bundle:nil];
         }
-            
+        
         
         UINavigationController *navController = [[UINavigationController alloc] init];
         [navController addChildViewController:viewController];

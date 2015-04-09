@@ -13,29 +13,15 @@
 #import "JsonUtil.h"
 
 @interface PaymentDetailViewController ()
-@property (strong, nonatomic) AppDelegate *delegate;
-@property (strong, nonatomic) TowingVoucher *towingVoucher;
+@property (readonly, strong, nonatomic) TowingVoucher *towingVoucher;
 @end
 
 @implementation PaymentDetailViewController
 #pragma mark - getters
-- (AppDelegate *) delegate
-{
-    if(!_delegate) {
-        _delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    }
-    
-    return _delegate;
-}
 
 - (TowingVoucher *) towingVoucher
 {
-    if(!_towingVoucher) {
-        AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-        _towingVoucher = delegate.towingVoucher;
-    }
-    
-    return _towingVoucher;
+    return self.delegate.towingVoucher;
 }
 
 #pragma mark - view lifecycle

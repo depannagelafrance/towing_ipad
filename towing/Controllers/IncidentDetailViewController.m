@@ -36,7 +36,7 @@
     AllotmentDirection *allotmentDirection;
 }
 
-@property (strong, nonatomic) TowingVoucher *towingVoucher;
+@property (strong, readonly, nonatomic) TowingVoucher *towingVoucher;
 @property (strong, nonatomic) UIPopoverController *popover;
 @property (strong, nonatomic) NSArray *trafficPosts;
 @property (strong, nonatomic) NSArray *allotmentDirections;
@@ -52,12 +52,7 @@
 
 - (TowingVoucher *) towingVoucher
 {
-    if(!_towingVoucher) {
-        AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-        _towingVoucher = delegate.towingVoucher;
-    }
-    
-    return _towingVoucher;
+    return self.delegate.towingVoucher;
 }
 
 - (NSArray *) trafficPosts
@@ -107,7 +102,7 @@
 {
     NSMutableArray *items = [NSMutableArray new];
     
-    NSDictionary *lanes = [self.delegate.towingVoucher.dossier jsonObjectForKey:TRAFFIC_LANES];
+    NSDictionary *lanes = [self.towingVoucher.dossier jsonObjectForKey:TRAFFIC_LANES];
     
     for (NSDictionary *lane in lanes) {
         if([[JsonUtil asString:[lane objectForKey:@"selected"]] isEqualToString:@"1"]) {
@@ -204,19 +199,19 @@
 {
     [self setTimingLabel:self.signaArrivalLabel
                andButton:self.signArrivalButton
-              withString:[JsonUtil asString:[self.delegate.towingVoucher jsonObjectForKey:SIGNA_ARRIVAL]]];
+              withString:[JsonUtil asString:[self.towingVoucher jsonObjectForKey:SIGNA_ARRIVAL]]];
     [self setTimingLabel:self.towingArrivalLabel
                andButton:self.towingArrivalButton
-              withString:[JsonUtil asString:[self.delegate.towingVoucher jsonObjectForKey:TOWING_ARRIVAL]]];
+              withString:[JsonUtil asString:[self.towingVoucher jsonObjectForKey:TOWING_ARRIVAL]]];
     [self setTimingLabel:self.towingStartLabel
                andButton:self.towingStartButton
-              withString:[JsonUtil asString:[self.delegate.towingVoucher jsonObjectForKey:TOWING_START]]];
+              withString:[JsonUtil asString:[self.towingVoucher jsonObjectForKey:TOWING_START]]];
     [self setTimingLabel:self.towingStopLabel
                andButton:self.towingStopButton
-              withString:[JsonUtil asString:[self.delegate.towingVoucher jsonObjectForKey:TOWING_END]]];
+              withString:[JsonUtil asString:[self.towingVoucher jsonObjectForKey:TOWING_END]]];
     [self setTimingLabel:self.towingCalledLabel
                andButton:nil
-              withString:[JsonUtil asString:[self.delegate.towingVoucher jsonObjectForKey:TOWING_CALLED]]];
+              withString:[JsonUtil asString:[self.towingVoucher jsonObjectForKey:TOWING_CALLED]]];
 }
 
 
@@ -230,12 +225,9 @@
 }
 
 - (void) saveVoucherToBackoffice {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    TowingVoucher *voucher = delegate.towingVoucher;
+    [self.delegate.managedObjectContext save:nil];
     
-    [delegate.managedObjectContext save:nil];
-    
-    [((Dossier *) voucher.dossier) performSaveToBackoffice];
+    [((Dossier *) self.towingVoucher.dossier) performSaveToBackoffice];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DIRECTIONS_UPDATED object:nil];
 }
@@ -341,9 +333,7 @@
                                                               DLog(@"%s -- OK", __PRETTY_FUNCTION__);
                                                               [self showWaitMessage];
                                                               
-                                                              //                                                              [self.delegate.towingVoucher.dossier performSaveToBackoffice];
-                                                              
-                                                              NSString *voucher_id = self.delegate.towingVoucher.id;
+                                                              NSString *voucher_id = self.towingVoucher.id;
                                                               NSString *token = self.delegate.authenticatedUser.token;
                                                               
                                                               NSString *api = [NSString stringWithFormat:API_IDLE_RIDE, voucher_id, token];
@@ -372,7 +362,7 @@
     //NSString *date = [DateUtil formatAsJsonDateTime:[NSDate date]];
     NSDate *date = [NSDate date];
     
-    [self.delegate.towingVoucher jsonObject:[NSString stringWithFormat:@"%f", [date timeIntervalSince1970]]
+    [self.towingVoucher jsonObject:[NSString stringWithFormat:@"%f", [date timeIntervalSince1970]]
                                      forKey:category];
     
     [self performSave];
@@ -408,7 +398,7 @@
 {
     if(selectedItem)
     {
-        TowingVoucher *voucher = self.delegate.towingVoucher;
+        TowingVoucher *voucher = self.towingVoucher;
         Dossier *dossier = (Dossier *)voucher.dossier;
         
         if([selectedItem isKindOfClass:[AllotmentDirection class]])
@@ -434,7 +424,7 @@
             [self.allotmentDirectionIndicatorButton setTitle:adi.name forState:UIControlStateNormal];
         } else {
             if([sender isEqual:self.trafficLanesButton]) {
-                NSDictionary *lanes = [self.delegate.towingVoucher.dossier jsonObjectForKey:TRAFFIC_LANES];
+                NSDictionary *lanes = [self.towingVoucher.dossier jsonObjectForKey:TRAFFIC_LANES];
                 
                 NSArray *selectedItemsFromResult = (NSArray *) selectedItem;
                 
@@ -458,8 +448,8 @@
                 
                 [self styleTrafficLanesButtonWithText:trafficLanesName];
                 
-                [self.delegate.towingVoucher.dossier jsonObject:lanes forKey:TRAFFIC_LANES];
-                [self.delegate.towingVoucher.dossier jsonObject:trafficLanesName forKey:TRAFFIC_LANES_NAME];
+                [self.towingVoucher.dossier jsonObject:lanes forKey:TRAFFIC_LANES];
+                [self.towingVoucher.dossier jsonObject:trafficLanesName forKey:TRAFFIC_LANES_NAME];
             }
         }
         

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewProtocol.h"
+#import "DetailItemViewController.h"
 
-@interface PaymentDetailViewController : UIViewController<DetailViewProtocol, UITextFieldDelegate>
+@interface PaymentDetailViewController : DetailItemViewController<DetailViewProtocol, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *totalAmountTextField;
 @property (weak, nonatomic) IBOutlet UITextField *paidInCashTextField;
 @property (weak, nonatomic) IBOutlet UITextField *paidByCreditCardTextField;

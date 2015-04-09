@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E5D85A5D-C02C-4C55-B93C-AFAC52F3DD94</string>
+	<key>IDESourceControlProjectName</key>
+	<string>towing</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>328B48E48A94CB0D5D9F34AA555CF46853197F6D</key>
+		<string>https://github.com/depannagelafrance/towing_ipad.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>towing/towing.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>328B48E48A94CB0D5D9F34AA555CF46853197F6D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/depannagelafrance/towing_ipad.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>328B48E48A94CB0D5D9F34AA555CF46853197F6D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>328B48E48A94CB0D5D9F34AA555CF46853197F6D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>

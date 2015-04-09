@@ -128,15 +128,13 @@
 
 - (IBAction)captureSignatureAction:(id)sender
 {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    
     SignatureViewController *viewController = [[SignatureViewController alloc] initWithNibName:@"SignatureView" bundle:nil];
-    viewController.token = delegate.authenticatedUser.token;
+    viewController.token = self.delegate.authenticatedUser.token;
     viewController.category = @"signature_police";
     viewController.signatureImageView = self.signatureView;
     
-    __block NSString *token = delegate.authenticatedUser.token;
-    __block NSString *voucherId = delegate.towingVoucher.id;
+    __block NSString *token = self.delegate.authenticatedUser.token;
+    __block NSString *voucherId = self.delegate.towingVoucher.id;
     
     [viewController setSignatureBlock:^(NSString *path) {
         NSLog(@"Wrote image to directory: %@", path);

@@ -31,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet GeneralActionButton *depotButton;
 @property (weak, nonatomic) IBOutlet DisruptiveActionButton *updateDepotButton;
 
-@property (strong, nonatomic) TowingVoucher *towingVoucher;
+@property (readonly, strong, nonatomic) TowingVoucher *towingVoucher;
 @end
 
 
@@ -39,10 +39,7 @@
 #pragma mark - getters
 - (TowingVoucher *) towingVoucher
 {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    TowingVoucher *voucher = delegate.towingVoucher;
-    
-    return voucher;
+    return self.delegate.towingVoucher;
 }
 
 #pragma mark - View Cycle stuff
@@ -95,9 +92,7 @@
 
 #pragma mark - IBActions
 - (IBAction)companyDepotAction:(id)sender {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    
-    User *user = delegate.authenticatedUser;
+    User *user = self.delegate.authenticatedUser;
     
     
     NSString *companyName = [user.jsonObject valueForKeyPath:@"company.name"];

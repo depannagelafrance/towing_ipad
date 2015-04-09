@@ -20,19 +20,14 @@
     UITextField *assignedTextField;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *signatureImageView;
-@property (strong, nonatomic) TowingVoucher *towingVoucher;
+@property (readonly, strong, nonatomic) TowingVoucher *towingVoucher;
 @property (strong, nonatomic) UIPopoverController *popover;
 @end
 
 @implementation CauserDetailViewController
 - (TowingVoucher *) towingVoucher
 {
-    if(!_towingVoucher) {
-        AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-        _towingVoucher = delegate.towingVoucher;
-    }
-    
-    return _towingVoucher;
+    return self.delegate.towingVoucher;
 }
 
 - (void) viewDidLoad
@@ -57,8 +52,7 @@
 #pragma mark - DetailViewProtocol implementation
 - (void) performSave
 {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    TowingVoucher *voucher = delegate.towingVoucher;
+    TowingVoucher *voucher = self.towingVoucher;
     
     NSDictionary *data = [voucher jsonObjectForKey:@"causer"];
     [data setValuesForKeysWithDictionary:@{@"last_name"      : self.nameTextField.text,
@@ -132,15 +126,13 @@
 
 - (IBAction)showSignatureViewAction:(id)sender
 {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    
     SignatureViewController *viewController = [[SignatureViewController alloc] initWithNibName:@"SignatureView" bundle:nil];
-    viewController.token = delegate.authenticatedUser.token;
+    viewController.token = self.delegate.authenticatedUser.token;
     viewController.category = @"signature_causer";
     viewController.signatureImageView = self.signatureImageView;
     
-    __block NSString *token = delegate.authenticatedUser.token;
-    __block NSString *voucherId = delegate.towingVoucher.id;
+    __block NSString *token = self.delegate.authenticatedUser.token;
+    __block NSString *voucherId = self.towingVoucher.id;
     
     [viewController setSignatureBlock:^(NSString *path) {
         NSLog(@"Wrote image to directory: %@", path);

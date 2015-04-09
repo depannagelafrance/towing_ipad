@@ -28,14 +28,28 @@
 
 @implementation LoginViewController
 
+#pragma mark - Lifecycle events
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.userNameTextField.text = [SharedPreferences fetchUsername];
-    self.passwordTextField.text = @"T0w1nG";
+    self.passwordTextField.text = DEBUG ? @"T0w1nG" : @"";
 }
+
+#pragma mark - Getters
+
+- (UIStoryboard *) mainStoryBoard {
+    if(!_mainStoryBoard) {
+        _mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    }
+    
+    return _mainStoryBoard;
+}
+
+#pragma mark - IBActions
 
 - (IBAction)performLoginAction:(id)sender
 {
@@ -48,7 +62,7 @@
     
     [self.restService post:LOGIN_API withParameters:params
            onCompleteBlock:^(NSDictionary *json) {
-               NSLog(@"Authenticated!");
+               DLog(@"Authenticated!");
                
                NSManagedObjectContext *context =  self.delegate.managedObjectContext;
                
@@ -73,9 +87,9 @@
                    [self triggerErrorMessage:UNABLE_TO_AUTHENTICATE];
                }
            } onFailBlock:^(NSError *error, int statusCode) {
-               NSLog(@"Failed to authenticated!");
-               NSLog(@" --> Status Code: %u", statusCode);
-               NSLog(@" --> %@", error);
+               DLog(@"Failed to authenticated!");
+               DLog(@" --> Status Code: %u", statusCode);
+               DLog(@" --> %@", error);
                
                [self hideWaitMessage];
                
@@ -84,27 +98,6 @@
            } ];
 }
 
-- (UIStoryboard *) mainStoryBoard {
-    if(!_mainStoryBoard) {
-        _mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    }
-    
-    return _mainStoryBoard;
-}
 
-
-#pragma mark - Navigation
-//
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//
-//
-//}
-//
-//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-//
-//}
 
 @end

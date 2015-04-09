@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Depannage La France. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "DetailItemViewController.h"
 #import "DetailViewProtocol.h"
 #import "AvailableActivitiesTableViewController.h"
 
-@interface ActivityDetailViewController : BaseViewController<DetailViewProtocol, AvailableActivitiesListPickerDelegate,
+@interface ActivityDetailViewController : DetailItemViewController<DetailViewProtocol, AvailableActivitiesListPickerDelegate,
                                                              UIPopoverControllerDelegate, UITextFieldDelegate,
                                                              UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

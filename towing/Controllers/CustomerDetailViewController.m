@@ -39,8 +39,7 @@
 #pragma mark - DetailViewProtocol implementation
 - (void) performSave
 {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    TowingVoucher *voucher = delegate.towingVoucher;
+    TowingVoucher *voucher = self.delegate.towingVoucher;
     
     NSDictionary *data = [voucher jsonObjectForKey:@"customer"];
     [data setValuesForKeysWithDictionary:@{@"last_name"      : self.nameTextField.text,
@@ -140,8 +139,7 @@
 
 - (void) setFormValuesForKey:(NSString *)key
 {
-    AppDelegate *delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-    TowingVoucher *voucher = delegate.towingVoucher;
+    TowingVoucher *voucher = self.delegate.towingVoucher;
     
     NSDictionary *json = [voucher jsonObjectForKey:key];
     

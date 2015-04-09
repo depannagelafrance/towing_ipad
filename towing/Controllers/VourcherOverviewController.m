@@ -18,20 +18,18 @@
 @interface VourcherOverviewController ()
 @property (strong, nonatomic) NSArray *vouchers;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation VourcherOverviewController
-- (NSManagedObjectContext *) managedObjectContext {
-    if(!_managedObjectContext) {
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        _managedObjectContext = delegate.managedObjectContext;
-    }
-    
-    return _managedObjectContext;
+- (NSManagedObjectContext *) managedObjectContext
+{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return delegate.managedObjectContext;
 }
 
-- (NSArray *) vouchers {
+- (NSArray *) vouchers
+{
     if(!_vouchers) {
         _vouchers = [TowingVoucher findAllVouchersWithContext:self.managedObjectContext];
     }
@@ -87,7 +85,8 @@
 }
 
 #pragma mark - Segues
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     if ([[segue identifier] isEqualToString:@"segueToDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -105,20 +104,24 @@
 
 #pragma mark - Table View
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1; //[[self.fetchedResultsController sections] count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     return sectionInfo ? [sectionInfo numberOfObjects] : 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return [self configureCellAtIndexPath:indexPath];
 }
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     //    [self performSegueWithIdentifier:@"segueToDetail" sender:self];
     AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -159,7 +162,8 @@
     }
 }
 
-- (UITableViewCell *) configureCellAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *) configureCellAtIndexPath:(NSIndexPath *)indexPath
+{
     TowingVoucher *voucher = (TowingVoucher *) [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     DossierTableViewCell *cell = (DossierTableViewCell *) [self.tableView dequeueReusableCellWithIdentifier:@"DossierCell" forIndexPath:indexPath];
@@ -282,15 +286,5 @@
 {
     [self.tableView endUpdates];
 }
-
-/*
- // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
- {
- // In the simplest, most efficient, case, reload the table view.
- [self.tableView reloadData];
- }
- */
 
 @end

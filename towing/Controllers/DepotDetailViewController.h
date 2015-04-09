@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewProtocol.h"
+#import "DetailItemViewController.h"
 
-@interface DepotDetailViewController : UIViewController<DetailViewProtocol>
+@interface DepotDetailViewController : DetailItemViewController<DetailViewProtocol>
 
 @end

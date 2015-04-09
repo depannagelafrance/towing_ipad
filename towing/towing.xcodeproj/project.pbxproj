@@ -91,7 +91,6 @@
 		B058458519D935D000FA162F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B058458319D935D000FA162F /* Main.storyboard */; };
 		B058458719D935D000FA162F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B058458619D935D000FA162F /* Images.xcassets */; };
 		B058458A19D935D000FA162F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B058458819D935D000FA162F /* LaunchScreen.xib */; };
-		B058459619D935D000FA162F /* towingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B058459519D935D000FA162F /* towingTests.m */; };
 		B05845A819D93E3F00FA162F /* RestService.m in Sources */ = {isa = PBXBuildFile; fileRef = B05845A719D93E3F00FA162F /* RestService.m */; };
 		B05845AF19D93F8A00FA162F /* CroutonStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B05845AB19D93F8A00FA162F /* CroutonStyle.m */; };
 		B05845B019D93F8A00FA162F /* Crouton.m in Sources */ = {isa = PBXBuildFile; fileRef = B05845AD19D93F8A00FA162F /* Crouton.m */; };
@@ -168,18 +167,8 @@
 		D16EE9AB81CA477AA794F1E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C0B9E19E5724025975CDDA8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		B058459019D935D000FA162F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B058456819D935D000FA162F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B058456F19D935D000FA162F;
-			remoteInfo = towing;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		1137515F98B34CDD956CC1A6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		67593B2F93BCD4D6CC350F2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9C0B9E19E5724025975CDDA8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0004DF41A951ACB002D81D9 /* MasterNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MasterNavigationViewController.h; path = Controllers/MasterNavigationViewController.h; sourceTree = "<group>"; };
 		B0004DF51A951ACB002D81D9 /* MasterNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MasterNavigationViewController.m; path = Controllers/MasterNavigationViewController.m; sourceTree = "<group>"; };
@@ -296,9 +285,6 @@
 		B058458419D935D000FA162F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B058458619D935D000FA162F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		B058458919D935D000FA162F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B058458F19D935D000FA162F /* towingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = towingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B058459419D935D000FA162F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B058459519D935D000FA162F /* towingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = towingTests.m; sourceTree = "<group>"; };
 		B05845A619D93E3F00FA162F /* RestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestService.h; path = Services/RestService.h; sourceTree = "<group>"; };
 		B05845A719D93E3F00FA162F /* RestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RestService.m; path = Services/RestService.m; sourceTree = "<group>"; };
 		B05845AB19D93F8A00FA162F /* CroutonStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CroutonStyle.m; sourceTree = "<group>"; };
@@ -421,6 +407,7 @@
 		B0F5361D19FAB80800BB06AB /* NotesDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotesDetail.xib; path = Views/NotesDetail.xib; sourceTree = "<group>"; };
 		B0F5361F19FAC1F800BB06AB /* TowingMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TowingMessage.h; path = Datamodels/TowingMessage.h; sourceTree = "<group>"; };
 		B0F5362019FAC1F800BB06AB /* TowingMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TowingMessage.m; path = Datamodels/TowingMessage.m; sourceTree = "<group>"; };
+		CC16D348DB1EBA39924F39A2 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,16 +419,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B058458C19D935D000FA162F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E9EF5E179BA334C9B0A3916 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC16D348DB1EBA39924F39A2 /* Pods.debug.xcconfig */,
+				67593B2F93BCD4D6CC350F2D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B0116FF41A7F9304007DD61E /* ListPickerTableViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,10 +453,9 @@
 			isa = PBXGroup;
 			children = (
 				B058457219D935D000FA162F /* towing */,
-				B058459219D935D000FA162F /* towingTests */,
 				B058457119D935D000FA162F /* Products */,
-				1137515F98B34CDD956CC1A6 /* Pods.xcconfig */,
 				F28097E8586D4E4DB124A1E1 /* Frameworks */,
+				1E9EF5E179BA334C9B0A3916 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -475,7 +463,6 @@
 			isa = PBXGroup;
 			children = (
 				B058457019D935D000FA162F /* Towing Tool.app */,
-				B058458F19D935D000FA162F /* towingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -507,23 +494,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B058459219D935D000FA162F /* towingTests */ = {
-			isa = PBXGroup;
-			children = (
-				B058459519D935D000FA162F /* towingTests.m */,
-				B058459319D935D000FA162F /* Supporting Files */,
-			);
-			path = towingTests;
-			sourceTree = "<group>";
-		};
-		B058459319D935D000FA162F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B058459419D935D000FA162F /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		B058459F19D935E400FA162F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,10 +502,10 @@
 				B058457E19D935D000FA162F /* MasterViewController.m */,
 				B058458019D935D000FA162F /* DetailViewController.h */,
 				B058458119D935D000FA162F /* DetailViewController.m */,
+				B05845B419D9447E00FA162F /* BaseViewController.h */,
 				B05845B519D9447E00FA162F /* BaseViewController.m */,
 				B05845B119D9431F00FA162F /* LoginViewController.h */,
 				B05845B219D9431F00FA162F /* LoginViewController.m */,
-				B05845B419D9447E00FA162F /* BaseViewController.h */,
 				B0D04EE419E96419001887ED /* VourcherOverviewController.h */,
 				B0D04EE519E96419001887ED /* VourcherOverviewController.m */,
 				B0D04EF019EB8A3E001887ED /* MenuTableViewController.h */,
@@ -857,24 +827,6 @@
 			productReference = B058457019D935D000FA162F /* Towing Tool.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B058458E19D935D000FA162F /* towingTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B058459C19D935D000FA162F /* Build configuration list for PBXNativeTarget "towingTests" */;
-			buildPhases = (
-				B058458B19D935D000FA162F /* Sources */,
-				B058458C19D935D000FA162F /* Frameworks */,
-				B058458D19D935D000FA162F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B058459119D935D000FA162F /* PBXTargetDependency */,
-			);
-			name = towingTests;
-			productName = towingTests;
-			productReference = B058458F19D935D000FA162F /* towingTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -887,10 +839,6 @@
 					B058456F19D935D000FA162F = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = G7B4942B39;
-					};
-					B058458E19D935D000FA162F = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = B058456F19D935D000FA162F;
 					};
 				};
 			};
@@ -908,7 +856,6 @@
 			projectRoot = "";
 			targets = (
 				B058456F19D935D000FA162F /* towing */,
-				B058458E19D935D000FA162F /* towingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1001,13 +948,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B058458D19D935D000FA162F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1023,7 +963,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EFD567A4A9E04195A6A0373B /* Check Pods Manifest.lock */ = {
@@ -1128,23 +1068,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B058458B19D935D000FA162F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B058459619D935D000FA162F /* towingTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B058459119D935D000FA162F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B058456F19D935D000FA162F /* towing */;
-			targetProxy = B058459019D935D000FA162F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B058458319D935D000FA162F /* Main.storyboard */ = {
@@ -1246,7 +1170,7 @@
 		};
 		B058459A19D935D000FA162F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1137515F98B34CDD956CC1A6 /* Pods.xcconfig */;
+			baseConfigurationReference = CC16D348DB1EBA39924F39A2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1265,7 +1189,7 @@
 		};
 		B058459B19D935D000FA162F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1137515F98B34CDD956CC1A6 /* Pods.xcconfig */;
+			baseConfigurationReference = 67593B2F93BCD4D6CC350F2D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1287,40 +1211,6 @@
 			};
 			name = Release;
 		};
-		B058459D19D935D000FA162F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = towingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/towing.app/towing";
-			};
-			name = Debug;
-		};
-		B058459E19D935D000FA162F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = towingTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/towing.app/towing";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1338,15 +1228,6 @@
 			buildConfigurations = (
 				B058459A19D935D000FA162F /* Debug */,
 				B058459B19D935D000FA162F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B058459C19D935D000FA162F /* Build configuration list for PBXNativeTarget "towingTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B058459D19D935D000FA162F /* Debug */,
-				B058459E19D935D000FA162F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

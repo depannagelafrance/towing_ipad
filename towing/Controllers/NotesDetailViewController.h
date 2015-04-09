@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Depannage La France. All rights reserved.
 //
 
-#import "BaseViewController.h"
 #import "DetailViewProtocol.h"
+#import "DetailItemViewController.h"
 
-@interface NotesDetailViewController : BaseViewController<DetailViewProtocol, UITableViewDataSource, UITableViewDelegate>
+@interface NotesDetailViewController : DetailItemViewController<DetailViewProtocol, UITableViewDataSource, UITableViewDelegate>
 
 @end

@@ -32,11 +32,7 @@
 #pragma mark - property getters
 - (TowingVoucher *) towingVoucher
 {
-    if(!_towingVoucher) {
-        _towingVoucher = self.delegate.towingVoucher;
-    }
-    
-    return _towingVoucher;
+    return self.delegate.towingVoucher;
 }
 
 - (NSArray *) licencePlates

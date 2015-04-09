@@ -66,12 +66,12 @@
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-    DLog(@"%s", __PRETTY_FUNCTION__);
+//    DLog(@"%s", __PRETTY_FUNCTION__);
     
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    DLog(@" --> Keyboard size (w/h): %f/%f", kbSize.width, kbSize.height);
+//    DLog(@" --> Keyboard size (w/h): %f/%f", kbSize.width, kbSize.height);
     
     if(UIEdgeInsetsEqualToEdgeInsets(originalScrollInsets, UIEdgeInsetsZero)) {
         originalScrollIndicatorInsets = self.currentScrollView.scrollIndicatorInsets;
@@ -84,14 +84,14 @@
 
     CGRect aRect = self.view.frame;
     
-    DLog(@" --> Current view is (w/h): %f/%f", aRect.size.width, aRect.size.height);
+//    DLog(@" --> Current view is (w/h): %f/%f", aRect.size.width, aRect.size.height);
     
     //aRect.size.height -= kbSize.height;
     aRect.size.height = aRect.size.height - kbSize.height;
 
     self.currentScrollView.contentSize = CGSizeMake(aRect.size.height, aRect.size.width);
     
-    DLog(@" --> Setting height/width to: %f/%f", aRect.size.height, aRect.size.width);
+//    DLog(@" --> Setting height/width to: %f/%f", aRect.size.height, aRect.size.width);
     
     
     CGPoint origin;
@@ -102,19 +102,19 @@
         origin = ((UITextField *) assignedTextField).frame.origin;
     }
     
-    DLog(@" --> Origin offset: %f", origin.y);
+//    DLog(@" --> Origin offset: %f", origin.y);
     
     origin.y -= (self.currentScrollView.contentOffset.y);
     
-    DLog(@" --> Setting Origin offset: %f", origin.y);
+//    DLog(@" --> Setting Origin offset: %f", origin.y);
     
 //    if (!CGRectContainsPoint(aRect, origin) ) {
-        DLog(@" --> Seems that the Point is not in the defined Rect");
-        
+//        DLog(@" --> Seems that the Point is not in the defined Rect");
+    
         CGPoint scrollPoint = CGPointMake(0.0, origin.y-(aRect.size.height) + SCROLL_MARGIN);
         
-        DLog(@" --> Created scrollpoint (x/y): %f/%f", scrollPoint.x, scrollPoint.y);
-        
+//        DLog(@" --> Created scrollpoint (x/y): %f/%f", scrollPoint.x, scrollPoint.y);
+    
         [self.currentScrollView setContentOffset:scrollPoint animated:YES];
         
 //    } 
@@ -153,8 +153,4 @@
 {
     assignedTextField = nil;
 }
-
-
-
-
 @end
