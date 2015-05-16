@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14C1514" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AllotmentDirection" representedClassName="AllotmentDirection" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,6 +8,7 @@
     <entity name="AllotmentDirectionIndicator" representedClassName="AllotmentDirectionIndicator" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sequence" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="direction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AllotmentDirection" inverseName="indicators" inverseEntity="AllotmentDirection" syncable="YES"/>
     </entity>
     <entity name="Dossier" representedClassName="Dossier" syncable="YES">
@@ -104,8 +105,8 @@
         <relationship name="vehicleAsTowing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowingVoucher" inverseName="towing_vehicle" inverseEntity="TowingVoucher" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AllotmentDirection" positionX="-36" positionY="135" width="128" height="88"/>
-        <element name="AllotmentDirectionIndicator" positionX="-27" positionY="144" width="128" height="88"/>
+        <element name="AllotmentDirection" positionX="-36" positionY="135" width="128" height="90"/>
+        <element name="AllotmentDirectionIndicator" positionX="-27" positionY="144" width="128" height="105"/>
         <element name="Dossier" positionX="-54" positionY="27" width="128" height="225"/>
         <element name="LicencePlateCountry" positionX="-36" positionY="135" width="128" height="75"/>
         <element name="Timeframe" positionX="-36" positionY="135" width="128" height="75"/>

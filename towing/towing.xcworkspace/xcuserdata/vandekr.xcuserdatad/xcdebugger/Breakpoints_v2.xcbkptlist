@@ -145,6 +145,36 @@
             endingLineNumber = "37"
             landmarkName = "@interface IncidentDetailViewController()"
             landmarkType = "2">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IncidentDetailViewController popover]"
+                  moduleName = "Towing Tool"
+                  urlString = "file:///Users/vandekr/Dropbox/ACUZIO_PROJECTS/DEPANNAGE_LAFRANCE/IOS/towing/Controllers/IncidentDetailViewController.m"
+                  timestampString = "450475977.134056"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IncidentDetailViewController setPopover:]"
+                  moduleName = "Towing Tool"
+                  urlString = "file:///Users/vandekr/Dropbox/ACUZIO_PROJECTS/DEPANNAGE_LAFRANCE/IOS/towing/Controllers/IncidentDetailViewController.m"
+                  timestampString = "450475977.134453"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

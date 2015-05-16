@@ -14,4 +14,7 @@
 - (void) synchronizeDossiersAndVouchersFromBackofficeInContext:(NSManagedObjectContext *)context;
 - (void) createTowingVoucherForDossier:(Dossier *) dossier;
 - (void) purgeDossiers:(NSNotification *) notification;
+
+- (BOOL) isMetaDataSynchRequiredWithContext:(NSManagedObjectContext *) context;
+- (void) synchronizeMetadataWithContext:(NSManagedObjectContext *) context token:(NSString *) token;
 @end

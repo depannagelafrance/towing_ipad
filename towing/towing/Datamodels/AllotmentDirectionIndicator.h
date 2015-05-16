@@ -1,9 +1,9 @@
 //
 //  AllotmentDirectionIndicator.h
-//  towing
+//  
 //
-//  Created by Kris Vandermast on 02/02/15.
-//  Copyright (c) 2015 Depannage La France. All rights reserved.
+//  Created by Kris Vandermast on 14/04/15.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * id;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * sequence;
 @property (nonatomic, retain) AllotmentDirection *direction;
 
 @end

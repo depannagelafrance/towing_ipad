@@ -18,12 +18,7 @@
 #import "AllotmentDirectionIndicator+Model.h"
 #import "TrafficLane+Model.h"
 #import "Vehicle+Model.h"
-
-#define VOCAB_TIMEFRAMES                @"/vocab/timeframe/%@"
-#define VOCAB_TIMEFRAME_ACTIVITIES      @"/vocab/timeframe/activities/%@"
-#define VOCAB_TIMEFRAME_ACTIVITY_FEES   @"/vocab/timeframe/activity/%@/fees/%@"
-#define VOCAB_TRAFFIC_LANES             @"/vocab/traffic_lanes/%@"
-#define VOCAB_VEHICLES                  @"/vocab/vehicles/%@"
+#import "SynchronisationHandler.h"
 
 #define UPDATE_PROFILE                  @"/me/%@"
 #define UPDATE_COMPANY_MOBILE_REG_ID    @"/admin/company/mobile/%@"
@@ -59,11 +54,11 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - IBActions
 - (IBAction)signatureAction:(id)sender
@@ -157,226 +152,9 @@
     NSString *token = self.delegate.authenticatedUser.token;
     NSManagedObjectContext *context =  self.delegate.managedObjectContext;
     
+    SynchronisationHandler *handler = [[SynchronisationHandler alloc] init];
     
-    [self refreshVehiclesWithContext:context token:token];
-    
-    [self refreshTrafficPostsWithContext:context token:token];
-    
-    [self refreshTimeframeDataWithContext:context token:token];
-    
-    [self refreshCountryLicencePlatesWithContext:context token:token];
-    
-    [self refreshAllotmentDirectionsWithContext:context token:token];
-    
-    [self refreshTrafficLanesWithContext:context token:token];
+    [handler synchronizeMetadataWithContext:context token:token];
 }
-
-- (void) refreshVehiclesWithContext:(NSManagedObjectContext *) context token:(NSString *) token
-{
-    NSString *api = [NSString stringWithFormat:VOCAB_VEHICLES, token];
-    
-    [self.restService get:api withParameters:nil onCompleteBlock:^(NSDictionary *data) {
-        for (NSDictionary *item in data)
-        {
-            Vehicle *post = [[Vehicle alloc] initFromDictionary:item withContext:context];
-            
-            if(post)
-            {
-                NSLog(@"Synchronized vehicle: %@", post.name);
-            }
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //process error
-        NSLog(@"Error while accessing: %@, %@", api, error);
-    }];
-}
-
-- (void) refreshTrafficLanesWithContext:(NSManagedObjectContext *) context token:(NSString *) token
-{
-    NSString *api = [NSString stringWithFormat:VOCAB_TRAFFIC_LANES, token];
-    
-    [self.restService get:api withParameters:nil onCompleteBlock:^(NSDictionary *data) {
-        for (NSDictionary *item in data)
-        {
-            TrafficLane *post = [[TrafficLane alloc] initFromDictionary:item withContext:context];
-            
-            if(post)
-            {
-                NSLog(@"Synchronized trafficlane: %@", post.name);
-            }
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //process error
-        NSLog(@"Error while accessing: %@, %@", api, error);
-    }];
-}
-
-- (void) refreshAllotmentDirectionsWithContext:(NSManagedObjectContext *) context token:(NSString *) token
-{
-    NSString *api = [NSString stringWithFormat:@"/vocab/directions/%@", token];
-    
-    [self.restService get:api withParameters:nil onCompleteBlock:^(NSDictionary *data) {
-        for (NSDictionary *item in data)
-        {
-            AllotmentDirection *post = [[AllotmentDirection alloc] initFromDictionary:item withContext:context];
-            
-            if(post)
-            {
-                NSLog(@"Synchronized direction: %@", post.name);
-                
-                [self refreshIndicatorsForDirection:post inContext:context token:token];
-            }
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //process error
-        NSLog(@"Error while accessing: %@, %@", api, error);
-    }];
-}
-
-- (void) refreshIndicatorsForDirection:(AllotmentDirection *) direction inContext:(NSManagedObjectContext *) context token:(NSString *) token
-{
-    NSString *api = [NSString stringWithFormat:@"/vocab/indicators/%@/%@", direction.id, token];
-    
-    [self.restService get:api withParameters:nil onCompleteBlock:^(NSDictionary *data) {
-        for (NSDictionary *item in data)
-        {
-            AllotmentDirectionIndicator *post = [[AllotmentDirectionIndicator alloc] initFromDictionary:item withContext:context];
-            
-            if(post)
-            {
-                NSLog(@"Synchronized %@ for %@", post.name, direction.name);
-                
-                
-                [direction addIndicatorsObject:post];
-            }
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //process error
-        NSLog(@"Error while accessing: %@, %@", api, error);
-    }];
-}
-
-- (void) refreshCountryLicencePlatesWithContext:(NSManagedObjectContext *) context token:(NSString *) token
-{
-    
-    NSString *api = [NSString stringWithFormat:@"/vocab/country_licence_plates/%@", token];
-    
-    [self.restService get:api withParameters:nil onCompleteBlock:^(NSDictionary *data) {
-        for (NSDictionary *item in data)
-        {
-            LicencePlateCountry *post = [[LicencePlateCountry alloc] initFromDictionary:item withContext:context];
-            
-            if(post)
-            {
-                NSLog(@"Synchronized licence plate: %@", post.name);
-            }
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //process error
-        NSLog(@"Error while accessing: %@, %@", api, error);
-    }];
-}
-
-- (void) refreshTrafficPostsWithContext:(NSManagedObjectContext *) context token:(NSString *) token
-{
-    // ----------------------------------------------------------------------
-    // police traffic post
-    NSString *company_id = [self.delegate.authenticatedUser.jsonObject valueForKeyPath:@"company.id"];
-    
-    NSString *api = [NSString stringWithFormat:@"/vocab/trafficpost/allotment/%@/%@", company_id, token];
-    
-    [self.restService get:api withParameters:nil onCompleteBlock:^(NSDictionary *data) {
-        for (NSDictionary *item in data)
-        {
-            TrafficPost *post = [[TrafficPost alloc] initFromDictionary:item withContext:context];
-            
-            if(post)
-            {
-                NSLog(@"Synchronized trafficpost: %@", post.name);
-            }
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //process error
-        NSLog(@"Error while accessing: %@, %@", api, error);
-    }];
-}
-
-- (void) refreshTimeframeDataWithContext:(NSManagedObjectContext *) context token:(NSString *)token
-{
-    // ----------------------------------------------------------------------
-    // timeframes en stuff
-    [self.restService get:[NSString stringWithFormat:VOCAB_TIMEFRAMES, token] withParameters:nil onCompleteBlock:^(NSDictionary *json) {
-        
-        //save the timeframes
-        for(NSDictionary *item in json)
-        {
-            Timeframe *timeframe = [[Timeframe alloc] initFromDictionary:item withContext:context];
-            
-            NSLog(@"Synchronized timeframe: %@", timeframe.name);
-            
-            [self refreshTimeframeActivityFeesForTimeframe:timeframe.id inContext:context token:token];
-        }
-        
-        [self.delegate saveContext];
-        
-        [self refreshTimeframeActivitiesWithContext:context token:token];
-        
-    } onFailBlock:^(NSError * error) {
-        //woeps
-        NSLog(@"%@", error);
-    }];
-}
-
-- (void) refreshTimeframeActivitiesWithContext:(NSManagedObjectContext *) context token:(NSString *) token
-{
-    //save the activities
-    [self.restService get:[NSString stringWithFormat:VOCAB_TIMEFRAME_ACTIVITIES, token] withParameters:nil onCompleteBlock:^(NSDictionary *activitiesData) {
-        NSLog(@"%@", activitiesData);
-        
-        for(NSDictionary *item in activitiesData) {
-            TimeframeActivity *activity = [[TimeframeActivity alloc] initFromDictionary:item withContext:context];
-            
-            NSLog(@"Synchronized timeframe activity: %@", activity.name);
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //woeps
-        NSLog(@"%@", error);
-    }];
-}
-
-- (void) refreshTimeframeActivityFeesForTimeframe:(NSNumber *)timeframe inContext:(NSManagedObjectContext *)context token:(NSString *)token
-{
-    //save the activity fees
-    [self.restService get:[NSString stringWithFormat:VOCAB_TIMEFRAME_ACTIVITY_FEES, timeframe , token] withParameters:nil onCompleteBlock:^(NSDictionary *activitiesData) {
-        DLog(@"%@", activitiesData);
-        
-        for(NSDictionary *item in activitiesData) {
-            TimeframeActivityFee *fee = [[TimeframeActivityFee alloc] initFromDictionary:item withContext:context];
-            DLog(@"---- TimeframeActivityFee -------" );
-            DLog(@"%@", item);
-            DLog(@"Synchronized timeframe activity fee: %@/%@/%@", fee.id, fee.fee_excl_vat, fee.fee_incl_vat);
-        }
-        
-        [self.delegate saveContext];
-    } onFailBlock:^(NSError *error) {
-        //woeps
-        NSLog(@"%@", error);
-    }];
-}
-
 
 @end

@@ -1,9 +1,9 @@
 //
 //  AllotmentDirectionIndicator.m
-//  towing
+//  
 //
-//  Created by Kris Vandermast on 02/02/15.
-//  Copyright (c) 2015 Depannage La France. All rights reserved.
+//  Created by Kris Vandermast on 14/04/15.
+//
 //
 
 #import "AllotmentDirectionIndicator.h"
@@ -14,6 +14,7 @@
 
 @dynamic id;
 @dynamic name;
+@dynamic sequence;
 @dynamic direction;
 
 @end

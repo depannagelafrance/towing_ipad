@@ -8,21 +8,27 @@
 
 #import "AllotmentDirectionIndicator+Model.h"
 #import "ContextHelper.h"
+#import "JsonUtil.h"
 
 #define ALLOTMENT_DIRECTION_INDICATOR_ENTITY @"AllotmentDirectionIndicator"
+
+#define ID          @"id"
+#define NAME        @"name"
+#define SEQUENCE    @"sequence"
 
 @implementation AllotmentDirectionIndicator (Model)
 - (AllotmentDirectionIndicator *) initFromDictionary:(NSDictionary *) data withContext:(NSManagedObjectContext *) context
 {
-    AllotmentDirectionIndicator *direction = [AllotmentDirectionIndicator findById:[data valueForKey:@"id"] withContext:context];
+    AllotmentDirectionIndicator *direction = [AllotmentDirectionIndicator findById:[data valueForKey:ID] withContext:context];
     
     if(!direction) {
         direction =[NSEntityDescription insertNewObjectForEntityForName:ALLOTMENT_DIRECTION_INDICATOR_ENTITY
                                                  inManagedObjectContext:context];
     }
     
-    direction.id = [NSString stringWithFormat:@"%@", [data valueForKey:@"id"]];
-    direction.name = [data valueForKey:@"name"];
+    direction.id = [NSString stringWithFormat:@"%@", [data valueForKey:ID]];
+    direction.name = [data valueForKey:NAME];
+    direction.sequence = [JsonUtil asNumber:[data objectForKey:SEQUENCE]];
     
     return direction;
 }
@@ -34,7 +40,11 @@
 
 + (NSArray *) findAll:(NSManagedObjectContext *) context
 {
-    return [ContextHelper findAllEntities:ALLOTMENT_DIRECTION_INDICATOR_ENTITY inContext:context];
+//    return [ContextHelper findAllEntities:ALLOTMENT_DIRECTION_INDICATOR_ENTITY inContext:context];
+    
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:SEQUENCE ascending:YES];
+    
+    return [ContextHelper findAllEntities:ALLOTMENT_DIRECTION_INDICATOR_ENTITY withSortingDescription:descriptor inContext:context];
 }
 
 @end

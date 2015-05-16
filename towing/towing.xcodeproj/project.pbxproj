@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011BC9AF1ADD956700E495E4 /* AllotmentDirectionIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 011BC9AE1ADD956700E495E4 /* AllotmentDirectionIndicator.m */; };
 		B0004DF61A951ACB002D81D9 /* MasterNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004DF51A951ACB002D81D9 /* MasterNavigationViewController.m */; };
 		B0004DF91A951BA1002D81D9 /* MasterSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004DF81A951BA1002D81D9 /* MasterSplitViewController.m */; };
 		B0004DFB1A963D49002D81D9 /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B0004DFA1A963D49002D81D9 /* app-icon.png */; };
@@ -18,7 +19,6 @@
 		B0096EF21A763509006306F6 /* DetailItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0096EF11A763509006306F6 /* DetailItemViewController.m */; };
 		B0116FE01A7F5F94007DD61E /* AllotmentDirection+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = B0116FDF1A7F5F94007DD61E /* AllotmentDirection+Model.m */; };
 		B0116FE31A7F6334007DD61E /* AllotmentDirectionIndicator+Model.m in Sources */ = {isa = PBXBuildFile; fileRef = B0116FE21A7F6334007DD61E /* AllotmentDirectionIndicator+Model.m */; };
-		B0116FE61A7F646D007DD61E /* AllotmentDirectionIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B0116FE51A7F646D007DD61E /* AllotmentDirectionIndicator.m */; };
 		B0116FE91A7F646D007DD61E /* AllotmentDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B0116FE81A7F646D007DD61E /* AllotmentDirection.m */; };
 		B0116FEF1A7F6899007DD61E /* AllotmentDirectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0116FEE1A7F6899007DD61E /* AllotmentDirectionTableViewController.m */; };
 		B0116FF31A7F92F8007DD61E /* AllotmentDirectionIndicatorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0116FF21A7F92F8007DD61E /* AllotmentDirectionIndicatorTableViewController.m */; };
@@ -168,6 +168,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011BC9AD1ADD956700E495E4 /* AllotmentDirectionIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllotmentDirectionIndicator.h; path = Datamodels/AllotmentDirectionIndicator.h; sourceTree = "<group>"; };
+		011BC9AE1ADD956700E495E4 /* AllotmentDirectionIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllotmentDirectionIndicator.m; path = Datamodels/AllotmentDirectionIndicator.m; sourceTree = "<group>"; };
 		67593B2F93BCD4D6CC350F2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9C0B9E19E5724025975CDDA8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0004DF41A951ACB002D81D9 /* MasterNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MasterNavigationViewController.h; path = Controllers/MasterNavigationViewController.h; sourceTree = "<group>"; };
@@ -186,8 +188,6 @@
 		B0116FDF1A7F5F94007DD61E /* AllotmentDirection+Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AllotmentDirection+Model.m"; path = "Models/AllotmentDirection+Model.m"; sourceTree = "<group>"; };
 		B0116FE11A7F6334007DD61E /* AllotmentDirectionIndicator+Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AllotmentDirectionIndicator+Model.h"; path = "Models/AllotmentDirectionIndicator+Model.h"; sourceTree = "<group>"; };
 		B0116FE21A7F6334007DD61E /* AllotmentDirectionIndicator+Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AllotmentDirectionIndicator+Model.m"; path = "Models/AllotmentDirectionIndicator+Model.m"; sourceTree = "<group>"; };
-		B0116FE41A7F646D007DD61E /* AllotmentDirectionIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllotmentDirectionIndicator.h; path = Datamodels/AllotmentDirectionIndicator.h; sourceTree = "<group>"; };
-		B0116FE51A7F646D007DD61E /* AllotmentDirectionIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllotmentDirectionIndicator.m; path = Datamodels/AllotmentDirectionIndicator.m; sourceTree = "<group>"; };
 		B0116FE71A7F646D007DD61E /* AllotmentDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllotmentDirection.h; path = Datamodels/AllotmentDirection.h; sourceTree = "<group>"; };
 		B0116FE81A7F646D007DD61E /* AllotmentDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllotmentDirection.m; path = Datamodels/AllotmentDirection.m; sourceTree = "<group>"; };
 		B0116FED1A7F6899007DD61E /* AllotmentDirectionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllotmentDirectionTableViewController.h; path = Controllers/AllotmentDirectionTableViewController.h; sourceTree = "<group>"; };
@@ -546,10 +546,10 @@
 		B05845A119D93A6800FA162F /* Datamodels */ = {
 			isa = PBXGroup;
 			children = (
+				011BC9AD1ADD956700E495E4 /* AllotmentDirectionIndicator.h */,
+				011BC9AE1ADD956700E495E4 /* AllotmentDirectionIndicator.m */,
 				B0116FE71A7F646D007DD61E /* AllotmentDirection.h */,
 				B0116FE81A7F646D007DD61E /* AllotmentDirection.m */,
-				B0116FE41A7F646D007DD61E /* AllotmentDirectionIndicator.h */,
-				B0116FE51A7F646D007DD61E /* AllotmentDirectionIndicator.m */,
 				B01508FF1A5A8A1E007F5E4D /* Dossier.h */,
 				B01509001A5A8A1E007F5E4D /* Dossier.m */,
 				B058457A19D935D000FA162F /* towing.xcdatamodeld */,
@@ -1007,7 +1007,6 @@
 				B08D07B119FE698D00756213 /* Timeframe+Model.m in Sources */,
 				B05845D519D973D400FA162F /* DateUtil.m in Sources */,
 				B0316A8219FA599B003839C7 /* SettingsViewController.m in Sources */,
-				B0116FE61A7F646D007DD61E /* AllotmentDirectionIndicator.m in Sources */,
 				B012F8FF1A5D2EA600D980E9 /* VatUtil.m in Sources */,
 				B05845C019D94FFC00FA162F /* User+Model.m in Sources */,
 				B058458219D935D000FA162F /* DetailViewController.m in Sources */,
@@ -1052,6 +1051,7 @@
 				B0116FE01A7F5F94007DD61E /* AllotmentDirection+Model.m in Sources */,
 				B05845CF19D96D2300FA162F /* TowingVoucher+Model.m in Sources */,
 				B092F18B1A2DD65E00092796 /* LicencePlateCountry.m in Sources */,
+				011BC9AF1ADD956700E495E4 /* AllotmentDirectionIndicator.m in Sources */,
 				B05845A819D93E3F00FA162F /* RestService.m in Sources */,
 				B08D07B419FE6B9B00756213 /* TimeframeActivity+Model.m in Sources */,
 				B0EBCE1C19EBFFAD003AAD26 /* SignatureView.m in Sources */,
@@ -1193,8 +1193,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Depannage La France nv (G7B4942B39)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Depannage La France nv";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "towing/Towing-Header.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1206,7 +1206,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Towing Tool";
-				PROVISIONING_PROFILE = "b6473120-a869-419c-94c8-a3a8eba977cb";
+				PROVISIONING_PROFILE = "98148a74-02f0-42b6-af38-ae026af25eb9";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

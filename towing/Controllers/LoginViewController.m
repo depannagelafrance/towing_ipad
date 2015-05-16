@@ -78,6 +78,10 @@
                    SynchronisationHandler *handler = [[SynchronisationHandler alloc] init];
                    [handler synchronizeDossiersAndVouchersFromBackofficeInContext:context];
                    
+                   if([handler isMetaDataSynchRequiredWithContext:context]) {
+                       [handler synchronizeMetadataWithContext:context token:self.delegate.authenticatedUser.token];
+                   }
+                   
                    [self hideWaitMessage];
                    
                    UINavigationController *viewController = (UINavigationController *) [self.mainStoryBoard instantiateViewControllerWithIdentifier:@"voucherOverviewNavigationControllerStoryboard"];

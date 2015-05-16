@@ -64,8 +64,6 @@
     return _trafficPosts;
 }
 
-
-
 - (NSArray *) allotmentDirections
 {
     if(!_allotmentDirections) {
@@ -75,14 +73,14 @@
     return _allotmentDirections;
 }
 
-- (NSArray *) allotmentDirectionIndicators {
-    
+- (NSArray *) allotmentDirectionIndicators
+{
     if(allotmentDirection) {
         return [[allotmentDirection.indicators allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             AllotmentDirectionIndicator *ad1 = (AllotmentDirectionIndicator *) obj1;
             AllotmentDirectionIndicator *ad2 = (AllotmentDirectionIndicator *) obj2;
             
-            return [ad1.name compare:ad2.name];
+            return [ad1.sequence compare:ad2.sequence];
         }];
     }
     
@@ -138,7 +136,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 - (void) styleTrafficLanesButtonWithText:(NSString *)trafficLanesName
 {
     if(!trafficLanesName || [trafficLanesName isEqualToString:@""]) {
@@ -151,7 +148,6 @@
         [self.trafficLanesButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     }
 }
-
 
 - (void) processUpdateTowingNotification:(NSNotification *) notification
 {
@@ -405,6 +401,8 @@
         {
             allotmentDirection = (AllotmentDirection *) selectedItem;
             
+            //set it both for direction_id and allotment_direction_id
+            [dossier jsonValue:allotmentDirection.id forKey:@"allotment_direction_id"];
             [dossier jsonValue:allotmentDirection.id forKey:ALLOTMENT_DIRECTION_ID];
             [dossier jsonValue:allotmentDirection.name forKey:@"direction_name"];
             
@@ -418,30 +416,39 @@
         {
             AllotmentDirectionIndicator *adi = (AllotmentDirectionIndicator *) selectedItem;
             
+            //set it both for indicator_id and allotment_direction_indicator_id
+            [dossier jsonValue:adi.id forKey:@"allotment_direction_indicator_id"];
             [dossier jsonValue:adi.id forKey:ALLOTMENT_DIRECTION_INDICATOR_ID];
             [dossier jsonValue:adi.name forKey:@"indicator_name"];
             
             [self.allotmentDirectionIndicatorButton setTitle:adi.name forState:UIControlStateNormal];
-        } else {
-            if([sender isEqual:self.trafficLanesButton]) {
+        }
+        else
+        {
+            if([sender isEqual:self.trafficLanesButton])
+            {
                 NSDictionary *lanes = [self.towingVoucher.dossier jsonObjectForKey:TRAFFIC_LANES];
                 
                 NSArray *selectedItemsFromResult = (NSArray *) selectedItem;
                 
                 NSString *trafficLanesName = @"";
                 
-                for (NSMutableDictionary *lane in lanes) {
+                for (NSMutableDictionary *lane in lanes)
+                {
                     TrafficLane *tl = [TrafficLane findById:[JsonUtil asString:[lane objectForKey:ID]]
                                                 withContext:self.delegate.managedObjectContext];
                     
-                    if([selectedItemsFromResult containsObject:tl]) {
+                    if([selectedItemsFromResult containsObject:tl])
+                    {
                         [lane setObject:@1 forKey:@"selected"];
                         
                         if(![trafficLanesName isEqualToString:@""])
                             trafficLanesName = [NSString stringWithFormat:@"%@,", trafficLanesName];
                         
                         trafficLanesName = [NSString stringWithFormat:@"%@ %@", trafficLanesName, tl.name];
-                    } else {
+                    }
+                    else
+                    {
                         [lane setObject:@0 forKey:@"selected"];
                     }
                 }
