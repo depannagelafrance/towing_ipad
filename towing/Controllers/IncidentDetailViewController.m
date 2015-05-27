@@ -80,7 +80,10 @@
             AllotmentDirectionIndicator *ad1 = (AllotmentDirectionIndicator *) obj1;
             AllotmentDirectionIndicator *ad2 = (AllotmentDirectionIndicator *) obj2;
             
-            return [ad1.sequence compare:ad2.sequence];
+            if(ad1.sequence && ad2.sequence)
+                return [ad1.sequence compare:ad2.sequence];
+            else
+                return [ad1.name compare:ad2.name];
         }];
     }
     
