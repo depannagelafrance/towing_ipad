@@ -10,7 +10,6 @@
 #import "RestService.h"
 #import "Crouton.h"
 
-#define CROUTON_PLEASE_WAIT @"Even geduld aub."
 
 @interface BaseViewController (){
     Crouton *waitMessage;

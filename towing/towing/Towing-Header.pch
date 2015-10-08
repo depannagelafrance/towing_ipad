@@ -9,16 +9,19 @@
 #ifndef towing_Towing_Header_pch
 #define towing_Towing_Header_pch
 
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
 #if DEBUG
 #define DLog(format, ...) NSLog((format), ## __VA_ARGS__)
+#define BASE_URL @"http://localhost:8443"
 #else
 #define DLog(format, ...)
+#define BASE_URL @"https://api.towing.be"
 #endif
 
 // -------------------------- API --------------------------
-#define BASE_URL @"https://api.towing.be"
-//#define BASE_URL @"http://localhost:8443"
-
 #define NEW_VOUCHERS_API                    @"/dossier/list/me/%@"
 #define DOSSIER_BY_ID                       @"/dossier/%@/%@"
 #define NEW_VOUCHER_FOR_DOSSIER_API         @"/dossier/voucher/%@/%@"
@@ -29,6 +32,8 @@
 #define NOTIFICATION_DIRECTIONS_UPDATED         @"DIRECTIONS_UPDATED"
 #define NOTIFICATION_UPDATE_VOUCHER_OVERVIEW    @"UPDATE_VOUCHER_OVERVIEW"
 #define NOTIFICATION_UPDATE_TOWING              @"UPDATE_TOWING"
+#define NOTIFICATION_SHOW_WAIT                  @"SHOW_WAIT"
+#define NOTIFICATION_HIDE_WAIT                  @"HIDE_WAIT"
 
 // ----------------------- ENTITIES -----------------------
 #define DOSSIER_ENTITY                  @"Dossier"
@@ -123,6 +128,8 @@
 #define VIEW_TITLE_SIGNATURE_POLICE     @"Hantekening - Verkeerspost"
 #define VIEW_TITLE_SIGNATURE_CAUSER     @"Handtekening - Hinderverwekker"
 #define VIEW_TITLE_VEHICLE_DETAIL       @"Voertuig"
+
+#define CROUTON_PLEASE_WAIT @"Even geduld aub."
 
 // CURRENCY FORMATTING
 #define FORMAT_CURRENCY             @"%.2f €"

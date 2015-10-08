@@ -49,7 +49,7 @@
     NSString *vehicleId = [JsonUtil asString:[data  objectForKey:TOWING_VEHICLE_ID]];
     
     voucher.towing_vehicle = [Vehicle findById:vehicleId withContext:context];
-        
+    
     return voucher;
 }
 
@@ -111,12 +111,16 @@
     {
         if([[[jsonVoucher objectForKey:@"id"] stringValue] isEqualToString:self.id])
         {
-            [jsonVoucher setObject:value forKey:key];
+            if(key && value)
+                [jsonVoucher setObject:value forKey:key];
         }
     }
     
-    NSData *data = [NSJSONSerialization dataWithJSONObject:jsonDossier options:NSJSONWritingPrettyPrinted error:nil];
-    ((Dossier *) self.dossier).json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if(jsonDossier)
+    {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:jsonDossier options:NSJSONWritingPrettyPrinted error:nil];
+        ((Dossier *) self.dossier).json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
 }
 
 - (id) jsonObjectForKey:(NSString *)key

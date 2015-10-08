@@ -8,6 +8,7 @@
 
 #import "DetailItemViewController.h"
 #import "AppDelegate.h"
+#import "JsonUtil.h"
 
 #define SCROLL_MARGIN 150
 
@@ -49,6 +50,34 @@
     }
 }
 
+- (void) recalculateVoucherTotal
+{
+    NSArray *payments = [self.delegate.towingVoucher jsonObjectForKey:@"towing_payment_details"];
+    
+    for (NSDictionary *payment in payments)
+    {
+        if([payment[@"category"] isEqualToString:@"CUSTOMER"])
+        {
+            NSArray *items = [self.delegate.towingVoucher jsonObjectForKey:TOWING_ACTIVITIES];
+            double totalInclVat = 0.0;
+            double totalExclVat = 0.0;
+            
+            for(NSDictionary *item in items)
+            {
+                totalInclVat += [JsonUtil asNumber:[item objectForKey:CAL_FEE_INCL_VAT]].doubleValue;
+                totalExclVat += [JsonUtil asNumber:[item objectForKey:CAL_FEE_EXCL_VAT]].doubleValue;
+            }
+            
+            [payment setValue:[NSString stringWithFormat:@"%.2f", totalInclVat] forKey:@"amount_incl_vat"];
+            [payment setValue:[NSString stringWithFormat:@"%.2f", totalExclVat] forKey:@"amount_excl_vat"];
+
+        }
+    }
+    
+    [self.delegate.towingVoucher jsonObject:payments forKey:@"towing_payment_details"];
+    
+}
+
 #pragma mark - scrolling stuff
 // Call this method somewhere in your view controller setup code.
 - (void)registerForKeyboardNotifications
@@ -66,12 +95,12 @@
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-//    DLog(@"%s", __PRETTY_FUNCTION__);
+    //    DLog(@"%s", __PRETTY_FUNCTION__);
     
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-//    DLog(@" --> Keyboard size (w/h): %f/%f", kbSize.width, kbSize.height);
+    //    DLog(@" --> Keyboard size (w/h): %f/%f", kbSize.width, kbSize.height);
     
     if(UIEdgeInsetsEqualToEdgeInsets(originalScrollInsets, UIEdgeInsetsZero)) {
         originalScrollIndicatorInsets = self.currentScrollView.scrollIndicatorInsets;
@@ -81,17 +110,17 @@
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     self.currentScrollView.contentInset = contentInsets;
     self.currentScrollView.scrollIndicatorInsets = contentInsets;
-
+    
     CGRect aRect = self.view.frame;
     
-//    DLog(@" --> Current view is (w/h): %f/%f", aRect.size.width, aRect.size.height);
+    //    DLog(@" --> Current view is (w/h): %f/%f", aRect.size.width, aRect.size.height);
     
     //aRect.size.height -= kbSize.height;
     aRect.size.height = aRect.size.height - kbSize.height;
-
+    
     self.currentScrollView.contentSize = CGSizeMake(aRect.size.height, aRect.size.width);
     
-//    DLog(@" --> Setting height/width to: %f/%f", aRect.size.height, aRect.size.width);
+    //    DLog(@" --> Setting height/width to: %f/%f", aRect.size.height, aRect.size.width);
     
     
     CGPoint origin;
@@ -102,22 +131,22 @@
         origin = ((UITextField *) assignedTextField).frame.origin;
     }
     
-//    DLog(@" --> Origin offset: %f", origin.y);
+    //    DLog(@" --> Origin offset: %f", origin.y);
     
     origin.y -= (self.currentScrollView.contentOffset.y);
     
-//    DLog(@" --> Setting Origin offset: %f", origin.y);
+    //    DLog(@" --> Setting Origin offset: %f", origin.y);
     
-//    if (!CGRectContainsPoint(aRect, origin) ) {
-//        DLog(@" --> Seems that the Point is not in the defined Rect");
+    //    if (!CGRectContainsPoint(aRect, origin) ) {
+    //        DLog(@" --> Seems that the Point is not in the defined Rect");
     
-        CGPoint scrollPoint = CGPointMake(0.0, origin.y-(aRect.size.height) + SCROLL_MARGIN);
-        
-//        DLog(@" --> Created scrollpoint (x/y): %f/%f", scrollPoint.x, scrollPoint.y);
+    CGPoint scrollPoint = CGPointMake(0.0, origin.y-(aRect.size.height) + SCROLL_MARGIN);
     
-        [self.currentScrollView setContentOffset:scrollPoint animated:YES];
-        
-//    } 
+    //        DLog(@" --> Created scrollpoint (x/y): %f/%f", scrollPoint.x, scrollPoint.y);
+    
+    [self.currentScrollView setContentOffset:scrollPoint animated:YES];
+    
+    //    }
 }
 
 

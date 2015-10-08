@@ -25,7 +25,8 @@
 }
 
 #pragma mark - view lifecycle
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     //configuring navigation bar
@@ -34,13 +35,19 @@
     UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(performSave)];
     self.navigationItem.rightBarButtonItem = done;
     
-    NSDictionary *payments = [self.towingVoucher jsonObjectForKey:@"towing_payments"];
+    NSArray *payments = [self.towingVoucher jsonObjectForKey:@"towing_payment_details"];
     
-    self.totalAmountTextField.text = [JsonUtil asString:[payments objectForKey:@"total_incl_vat"]];
-    self.totalAmountExclVatTextField.text = [JsonUtil asString:[payments objectForKey:@"total_excl_vat"]];
-    self.paidInCashTextField.text = [JsonUtil asString:[payments objectForKey:@"paid_in_cash"]];
-    self.paidByMaestroTextField.text = [JsonUtil asString:[payments objectForKey:@"paid_by_debit_card"]];
-    self.paidByCreditCardTextField.text = [JsonUtil asString:[payments objectForKey:@"paid_by_credit_card"]];
+    for (NSDictionary *payment in payments)
+    {
+        if([payment[@"category"] isEqualToString:@"CUSTOMER"])
+        {
+            self.totalAmountTextField.text = [JsonUtil asString:[payment objectForKey:@"amount_incl_vat"]];
+            self.totalAmountExclVatTextField.text = [JsonUtil asString:[payment objectForKey:@"amount_excl_vat"]];
+            self.paidInCashTextField.text = [JsonUtil asString:[payment objectForKey:@"amount_paid_cash"]];
+            self.paidByMaestroTextField.text = [JsonUtil asString:[payment objectForKey:@"amount_paid_maestro"]];
+            self.paidByCreditCardTextField.text = [JsonUtil asString:[payment objectForKey:@"amount_paid_visa"]];
+        }
+    }
     
     self.paidInCashTextField.delegate = self;
     self.paidByMaestroTextField.delegate = self;
@@ -67,13 +74,19 @@
 {
     NSLog(@"Triggering %s", __PRETTY_FUNCTION__);
     
-    NSDictionary *payments = [self.towingVoucher jsonObjectForKey:@"towing_payments"];
+    NSArray *payments = [self.towingVoucher jsonObjectForKey:@"towing_payment_details"];
     
-    [payments setValue:self.paidInCashTextField.text forKey:@"paid_in_cash"];
-    [payments setValue:self.paidByMaestroTextField.text forKey:@"paid_by_debit_card"];
-    [payments setValue:self.paidByCreditCardTextField.text forKey:@"paid_by_credit_card"];
+    for (NSDictionary *payment in payments)
+    {
+        if([payment[@"category"] isEqualToString:@"CUSTOMER"])
+        {
+            [payment setValue:self.paidInCashTextField.text forKey:@"amount_paid_cash"];
+            [payment setValue:self.paidByMaestroTextField.text forKey:@"amount_paid_maestro"];
+            [payment setValue:self.paidByCreditCardTextField.text forKey:@"amount_paid_visa"];
+        }
+    }
     
-    [self.towingVoucher jsonObject:payments forKey:@"towing_payments"];
+    [self.towingVoucher jsonObject:payments forKey:@"towing_payment_details"];
     
     [((Dossier *) self.towingVoucher.dossier) performSaveToBackoffice];
 }
@@ -106,7 +119,7 @@
     NSDictionary *data = [self.towingVoucher jsonObjectForKey:@"customer"];
     
     if(data[@"company_vat"] && ![data[@"company_vat"] isKindOfClass:[NSNull class]] && ![data[@"company_vat"] isEqualToString:@""]) {
-        return [data[@"company_vat"] hasPrefix:@"BE"];
+        return [[data[@"company_vat"] uppercaseString] hasPrefix:@"BE"];
     }
     
     return false;
@@ -114,31 +127,35 @@
 
 - (void) recaculateUnpaid
 {
-    NSDictionary *payments = [self.towingVoucher jsonObjectForKey:@"towing_payments"];
+    NSArray *payments = [self.towingVoucher jsonObjectForKey:@"towing_payment_details"];
     
-    double cash = self.paidInCashTextField.text.doubleValue;
-    double creditCard = self.paidByCreditCardTextField.text.doubleValue;
-    double maestro = self.paidByMaestroTextField.text.doubleValue;
-    
-    double total = [JsonUtil asNumber:[payments objectForKey:@"total_incl_vat"]].doubleValue;
-    
-    if([self shouldUseFeeExclVat]) {
-        total = [JsonUtil asNumber:[payments objectForKey:@"total_excl_vat"]].doubleValue;
-    }
-    
-    double unpaid = total - cash - creditCard - maestro;
-    
-    self.unpaidTextField.text = [NSString stringWithFormat:@"%.2f", unpaid];
-    
-    if(unpaid < 0) {
-        self.unpaidTextField.backgroundColor = [UIColor redColor];
-        self.unpaidTextField.textColor = [UIColor whiteColor];
-    } else if(unpaid > 0) {
-        self.unpaidTextField.backgroundColor = [UIColor orangeColor];
-        self.unpaidTextField.textColor = [UIColor whiteColor];
-    } else {
-        self.unpaidTextField.backgroundColor = [UIColor greenColor];
-        self.unpaidTextField.textColor = [UIColor whiteColor];
+    for (NSDictionary *payment in payments) {
+        if([payment[@"category"] isEqualToString:@"CUSTOMER"]) {
+            double cash = self.paidInCashTextField.text.doubleValue;
+            double creditCard = self.paidByCreditCardTextField.text.doubleValue;
+            double maestro = self.paidByMaestroTextField.text.doubleValue;
+            
+            double total = [JsonUtil asNumber:[payment objectForKey:@"amount_incl_vat"]].doubleValue;
+            
+            if([self shouldUseFeeExclVat]) {
+                total = [JsonUtil asNumber:[payment objectForKey:@"amount_excl_vat"]].doubleValue;
+            }
+            
+            double unpaid = total - cash - creditCard - maestro;
+            
+            self.unpaidTextField.text = [NSString stringWithFormat:@"%.2f", unpaid];
+            
+            if(unpaid < 0) {
+                self.unpaidTextField.backgroundColor = [UIColor redColor];
+                self.unpaidTextField.textColor = [UIColor whiteColor];
+            } else if(unpaid > 0) {
+                self.unpaidTextField.backgroundColor = [UIColor orangeColor];
+                self.unpaidTextField.textColor = [UIColor whiteColor];
+            } else {
+                self.unpaidTextField.backgroundColor = [UIColor greenColor];
+                self.unpaidTextField.textColor = [UIColor whiteColor];
+            }
+        }
     }
 }
 

@@ -92,6 +92,9 @@
     
     NSArray *currentDossiers = [Dossier findAllDossiersWithContext:context];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_WAIT
+                                                        object:self];
+    
     //only delete dossiers that have been marked as synchronized.
     for (Dossier *dossier in currentDossiers) {
         if([dossier.hasBeenSynchd isEqualToValue:@0]) {
@@ -143,8 +146,14 @@
               
               
               [context save:nil];
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HIDE_WAIT
+                                                                  object:self];
           } onFailBlock:^(NSError *error) {
               NSLog(@"Failed to fetch new vouchers: %@", error);
+              
+              [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_HIDE_WAIT
+                                                                  object:self];
           }];
 }
 

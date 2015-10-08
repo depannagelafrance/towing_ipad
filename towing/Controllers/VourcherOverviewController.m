@@ -14,8 +14,11 @@
 #import "DateUtil.h"
 #import "JsonUtil.h"
 #import "SynchronisationHandler.h"
+#import "Crouton.h"
 
-@interface VourcherOverviewController ()
+@interface VourcherOverviewController () {
+        Crouton *waitMessage;
+}
 @property (strong, nonatomic) NSArray *vouchers;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -51,6 +54,16 @@
                                              selector:@selector(processNotification:)
                                                  name:NOTIFICATION_UPDATE_VOUCHER_OVERVIEW
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(processNotification:)
+                                                 name:NOTIFICATION_HIDE_WAIT
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(processNotification:)
+                                                 name:NOTIFICATION_SHOW_WAIT
+                                               object:nil];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -71,7 +84,13 @@
 {
     DLog(@"Processing notification: %@", aNotification);
     
-    [self refreshTable];
+    if([aNotification.name isEqualToString:NOTIFICATION_SHOW_WAIT]) {
+        [self showWaitMessage];
+    } else if([aNotification.name isEqualToString:NOTIFICATION_HIDE_WAIT]) {
+        [self hideWaitMessage];
+    } else {
+        [self refreshTable];
+    }
 }
 
 - (void) refreshTable
@@ -176,6 +195,19 @@
     } else {
         cell.statusView.backgroundColor = [UIColor orangeColor];
     }
+    
+    NSString *towingEnd = [JsonUtil asString:[voucher jsonObjectForKey:TOWING_END]];
+    
+    BOOL result = !towingEnd && ![towingEnd isEqualToString:@""];
+    
+    if(!result) {
+        NSDictionary* attributes = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle],
+                                     NSFontAttributeName: [UIFont italicSystemFontOfSize:17.0f]};
+        
+        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:voucher.voucher_number attributes:attributes];
+        cell.numberLabel.attributedText = attributedString;
+    }
+
     
     NSLog(@"Json: %@", ((Dossier *)voucher.dossier).json);
     
@@ -285,6 +317,21 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+}
+
+#pragma mark - Crouton actions
+- (void) showWaitMessage
+{
+    if(!waitMessage)
+        waitMessage = [Crouton pleaseWait:CROUTON_PLEASE_WAIT inView:self.view];
+}
+
+- (void) hideWaitMessage
+{
+    if(waitMessage)
+        [waitMessage dismiss];
+    
+    waitMessage = nil;
 }
 
 @end

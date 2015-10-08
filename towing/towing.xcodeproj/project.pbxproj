@@ -662,8 +662,8 @@
 			children = (
 				B0004E021A964124002D81D9 /* app-icon58.png */,
 				B0004DFC1A963F8B002D81D9 /* app-icon29.png */,
-				B0004DFD1A963F8C002D81D9 /* app-icon40.png */,
 				B0004DFE1A963F8C002D81D9 /* app-icon76.png */,
+				B0004DFD1A963F8C002D81D9 /* app-icon40.png */,
 				B0004DFA1A963D49002D81D9 /* app-icon.png */,
 				B03E19EA1A87C5C400C36D8A /* carbg.png */,
 				B011700D1A84C85D007DD61E /* flash_bang-25.png */,
@@ -833,7 +833,7 @@
 		B058456819D935D000FA162F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Depannage La France";
 				TargetAttributes = {
 					B058456F19D935D000FA162F = {
@@ -1110,6 +1110,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1181,6 +1182,7 @@
 				INFOPLIST_FILE = towing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = be.towing.dlf.app.towing;
 				PRODUCT_NAME = "Towing Tool";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1205,6 +1207,7 @@
 				INFOPLIST_FILE = towing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = be.towing.dlf.app.towing;
 				PRODUCT_NAME = "Towing Tool";
 				PROVISIONING_PROFILE = "98148a74-02f0-42b6-af38-ae026af25eb9";
 				SDKROOT = iphoneos;

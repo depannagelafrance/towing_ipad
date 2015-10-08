@@ -16,4 +16,5 @@
 
 - (void) presentPopOverViewController:(id)viewController fromSender:(id) sender withDelegate:(id) delegate;
 - (void) dismissPopOverViewController;
+- (void) recalculateVoucherTotal;
 @end

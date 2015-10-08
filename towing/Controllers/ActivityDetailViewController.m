@@ -175,6 +175,7 @@
     self.totalExclVatLabel.text = [NSString stringWithFormat:FORMAT_CURRENCY, cal_fee_excl_vat];
     self.totalInclVatLabel.text = [NSString stringWithFormat:FORMAT_CURRENCY, cal_fee_incl_vat];
     
+    [self recalculateVoucherTotal];
 }
 
 #pragma mark - DetailViewProtocol
