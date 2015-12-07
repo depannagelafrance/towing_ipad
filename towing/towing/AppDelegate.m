@@ -33,10 +33,26 @@
 
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
-
 @end
 
 @implementation AppDelegate
+
+- (CLLocationManager *) locationManager {
+    if(!_locationManager) {
+        DLog(@"%s -- Creating new instance", __PRETTY_FUNCTION__);
+        
+        if([CLLocationManager locationServicesEnabled]) {
+            _locationManager = [[CLLocationManager alloc] init];
+        } else {
+            DLog(@"%s -- LOCATION SERVICES NOT ENABLED!", __PRETTY_FUNCTION__);
+        }
+        
+    }
+    
+    DLog(@"%s -- Returning locationmanager", __PRETTY_FUNCTION__);
+    
+    return _locationManager;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -63,6 +79,19 @@
     if(notification)
     {
         [self processNotification:notification.userInfo];
+    }
+    
+    
+    //configure the location manager
+    if([CLLocationManager locationServicesEnabled])
+    {
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        
+        [self.locationManager requestAlwaysAuthorization];
+        [self.locationManager startUpdatingLocation];
+    } else {
+        DLog(@"%s -- LOCATION SERVICES NOT ENABLED", __PRETTY_FUNCTION__);
     }
     
     
@@ -104,6 +133,8 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+    
+    [self.locationManager stopUpdatingLocation];
 }
 
 #pragma mark - Core Data stack
@@ -318,7 +349,7 @@
                                                           otherButtonTitles:nil];
                     [alert show];
                 }
-             }
+            }
             else if ([action isEqualToString:ACTION_COLLECTOR_SIGNATURE])
             {
                 [self gotoCollectorSignatureStoryBoard:userInfo];
@@ -328,7 +359,7 @@
 }
 
 - (UIStoryboard *) mainStoryBoard {
-    if(!_mainStoryBoard) {        
+    if(!_mainStoryBoard) {
         _mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     }
     
@@ -401,6 +432,27 @@
     {
         [[Crouton alert:message inView:viewController.view] show];
     }
+}
+
+#pragma mark - Core Location Delegate
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    DLog(@"%s - Failed to fetch the location: %@", __PRETTY_FUNCTION__, error);
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(nonnull CLLocation *)newLocation fromLocation:(nonnull CLLocation *)oldLocation
+{
+    DLog(@" -- UPDATED LOCATION");
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    CLLocation *lastLocation = (CLLocation *)locations.lastObject;
+    
+    DLog(@"%s -- LAT (%f) / LONG (%f)", __PRETTY_FUNCTION__, lastLocation.coordinate.latitude, lastLocation.coordinate.longitude);
+    
+    self.currentLocation = lastLocation;
+    
 }
 
 @end

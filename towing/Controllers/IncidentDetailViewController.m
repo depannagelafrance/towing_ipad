@@ -30,6 +30,9 @@
 #import "SharedPreferences.h"
 #import "DateUtil.h"
 
+#import <CoreLocation/CoreLocation.h>
+
+#define ERROR_LOCATION_SERVICES_NOT_ENABLED @"We kunnen uw huidige locatie niet bepalen. Gelieve dit aan te schakelen!"
 
 @interface IncidentDetailViewController() {
     UITextField *assignedTextField;
@@ -114,6 +117,12 @@
     
     
     return [items copy];
+}
+
+
+- (BOOL) isLocationServiceEnabled
+{
+    return [CLLocationManager locationServicesEnabled];
 }
 
 #pragma mark - View cycle
@@ -273,10 +282,12 @@
 {
     [self registerVoucherDateTimeForCategory:TOWING_ARRIVAL button:sender] ;
 }
+
 - (IBAction)towingStartAction:(id)sender
 {
     [self registerVoucherDateTimeForCategory:TOWING_START button:sender];
 }
+
 - (IBAction)towingEndAction:(id)sender
 {
     
@@ -356,19 +367,40 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+
 - (void) registerVoucherDateTimeForCategory:(NSString *) category button:(id)sender
 {
-    //NSString *date = [DateUtil formatAsJsonDateTime:[NSDate date]];
-    NSDate *date = [NSDate date];
-    
-    [self.towingVoucher jsonObject:[NSString stringWithFormat:@"%f", [date timeIntervalSince1970]]
-                                     forKey:category];
-    
-    [self performSave];
-    
-    ((UIButton *) sender).enabled = NO;
-    
-    [self displayTimings];
+    if([self isLocationServiceEnabled])
+    {
+        //NSString *date = [DateUtil formatAsJsonDateTime:[NSDate date]];
+        NSDate *date = [NSDate date];
+        
+        [self.towingVoucher jsonObject:[NSString stringWithFormat:@"%f", [date timeIntervalSince1970]]
+                                forKey:category];
+        
+        
+        CLLocation * currentLocation = ((AppDelegate *) [UIApplication sharedApplication].delegate).currentLocation;
+        
+        if(currentLocation)
+        {
+            [self.towingVoucher jsonObject:[NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude]
+                                    forKey:[NSString stringWithFormat:@"%@_lat", category]];
+            
+            [self.towingVoucher jsonObject:[NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude]
+                                    forKey:[NSString stringWithFormat:@"%@_long", category]];
+        }
+        
+        
+        [self performSave];
+        
+        ((UIButton *) sender).enabled = NO;
+        
+        [self displayTimings];
+    }
+    else
+    {
+        [self triggerErrorMessage:ERROR_LOCATION_SERVICES_NOT_ENABLED];
+    }
 }
 
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		011BC9AF1ADD956700E495E4 /* AllotmentDirectionIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 011BC9AE1ADD956700E495E4 /* AllotmentDirectionIndicator.m */; };
+		01FAA79B1BFA10CF00F36355 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FAA79A1BFA10CF00F36355 /* CoreLocation.framework */; };
 		B0004DF61A951ACB002D81D9 /* MasterNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004DF51A951ACB002D81D9 /* MasterNavigationViewController.m */; };
 		B0004DF91A951BA1002D81D9 /* MasterSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004DF81A951BA1002D81D9 /* MasterSplitViewController.m */; };
 		B0004DFB1A963D49002D81D9 /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B0004DFA1A963D49002D81D9 /* app-icon.png */; };
@@ -170,6 +171,7 @@
 /* Begin PBXFileReference section */
 		011BC9AD1ADD956700E495E4 /* AllotmentDirectionIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllotmentDirectionIndicator.h; path = Datamodels/AllotmentDirectionIndicator.h; sourceTree = "<group>"; };
 		011BC9AE1ADD956700E495E4 /* AllotmentDirectionIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllotmentDirectionIndicator.m; path = Datamodels/AllotmentDirectionIndicator.m; sourceTree = "<group>"; };
+		01FAA79A1BFA10CF00F36355 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		67593B2F93BCD4D6CC350F2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9C0B9E19E5724025975CDDA8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0004DF41A951ACB002D81D9 /* MasterNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MasterNavigationViewController.h; path = Controllers/MasterNavigationViewController.h; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01FAA79B1BFA10CF00F36355 /* CoreLocation.framework in Frameworks */,
 				D16EE9AB81CA477AA794F1E0 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -800,6 +803,7 @@
 		F28097E8586D4E4DB124A1E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01FAA79A1BFA10CF00F36355 /* CoreLocation.framework */,
 				9C0B9E19E5724025975CDDA8 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -839,6 +843,14 @@
 					B058456F19D935D000FA162F = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = G7B4942B39;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
