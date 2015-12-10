@@ -12,6 +12,7 @@
 #import "TowingVoucherSignature.h"
 #import "TrafficPost+Model.h"
 #import "SignatureViewController.h"
+#import "CECUtils.h"
 
 #define FORMAT_DATETIME_READABLE @"dd/MM/yyyy HH:mm"
 
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) UIPopoverController *popover;
 
 @property (weak, nonatomic) IBOutlet UIButton *cicTimeButton;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
 @property (weak, nonatomic) IBOutlet UILabel *callNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *trafficPostButton;
@@ -78,8 +80,9 @@
     
     
     NSString *cic = [JsonUtil asString:[voucher jsonObjectForKey:CIC ]];
+    NSString *policeName = [JsonUtil asString:[voucher jsonObjectForKey:TRAFFIC_POST_NAME]];
     
-    if(cic && ![cic isEqualToString:@""]) {
+    if(![CECUtils empty:cic]) {
         NSDate *cicDate = [NSDate dateWithTimeIntervalSince1970:[cic integerValue]];
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -87,6 +90,8 @@
         
         [self.cicTimeButton setTitle:[formatter stringFromDate:cicDate] forState:UIControlStateNormal];
     }
+    
+    self.nameTextField.text = policeName;
     
     //configuring navigation bar
     self.navigationItem.title = @"Federale Wegpolitie";
@@ -105,6 +110,7 @@
     TowingVoucher *voucher = self.delegate.towingVoucher;
     
 //    [voucher jsonValue:self.cicTextField.text forKey:CIC];
+    [voucher jsonValue:self.nameTextField.text forKey:TRAFFIC_POST_NAME];
     
     [((Dossier *) voucher.dossier) performSaveToBackoffice];
 }
@@ -198,7 +204,7 @@
     
     NSString *cic = [JsonUtil asString:[self.delegate.towingVoucher jsonObjectForKey:CIC ]];
     
-    if(!cic || [cic isEqualToString:@""])
+    if(![CECUtils empty:cic])
     {
         [self setCIcTime:[NSDate date]];
     }

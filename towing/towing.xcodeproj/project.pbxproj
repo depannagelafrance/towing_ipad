@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		011BC9AF1ADD956700E495E4 /* AllotmentDirectionIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 011BC9AE1ADD956700E495E4 /* AllotmentDirectionIndicator.m */; };
+		016CB0141C19A03000D79400 /* CECUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CB0131C19A03000D79400 /* CECUtils.m */; };
 		01FAA79B1BFA10CF00F36355 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FAA79A1BFA10CF00F36355 /* CoreLocation.framework */; };
 		B0004DF61A951ACB002D81D9 /* MasterNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004DF51A951ACB002D81D9 /* MasterNavigationViewController.m */; };
 		B0004DF91A951BA1002D81D9 /* MasterSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0004DF81A951BA1002D81D9 /* MasterSplitViewController.m */; };
@@ -171,6 +172,8 @@
 /* Begin PBXFileReference section */
 		011BC9AD1ADD956700E495E4 /* AllotmentDirectionIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllotmentDirectionIndicator.h; path = Datamodels/AllotmentDirectionIndicator.h; sourceTree = "<group>"; };
 		011BC9AE1ADD956700E495E4 /* AllotmentDirectionIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllotmentDirectionIndicator.m; path = Datamodels/AllotmentDirectionIndicator.m; sourceTree = "<group>"; };
+		016CB0121C19A03000D79400 /* CECUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CECUtils.h; sourceTree = "<group>"; };
+		016CB0131C19A03000D79400 /* CECUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CECUtils.m; sourceTree = "<group>"; };
 		01FAA79A1BFA10CF00F36355 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		67593B2F93BCD4D6CC350F2D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9C0B9E19E5724025975CDDA8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +599,8 @@
 		B05845AA19D93F5B00FA162F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				016CB0121C19A03000D79400 /* CECUtils.h */,
+				016CB0131C19A03000D79400 /* CECUtils.m */,
 				B05845AB19D93F8A00FA162F /* CroutonStyle.m */,
 				B05845AC19D93F8A00FA162F /* CroutonStyle.h */,
 				B05845AD19D93F8A00FA162F /* Crouton.m */,
@@ -1067,6 +1072,7 @@
 				B05845A819D93E3F00FA162F /* RestService.m in Sources */,
 				B08D07B419FE6B9B00756213 /* TimeframeActivity+Model.m in Sources */,
 				B0EBCE1C19EBFFAD003AAD26 /* SignatureView.m in Sources */,
+				016CB0141C19A03000D79400 /* CECUtils.m in Sources */,
 				B05845B019D93F8A00FA162F /* Crouton.m in Sources */,
 				B0D04EE619E96419001887ED /* VourcherOverviewController.m in Sources */,
 				B0116FF31A7F92F8007DD61E /* AllotmentDirectionIndicatorTableViewController.m in Sources */,

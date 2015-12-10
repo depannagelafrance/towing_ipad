@@ -60,6 +60,7 @@
 
 #define TRAFFIC_POST_NAME       @"traffic_post_name"
 #define TRAFFIC_POST_ID         @"police_traffic_post_id"
+#define TRAFFIC_POST_NAME       @"police_name"
 #define SIGNA_ARRIVAL           @"signa_arrival"
 #define TOWING_ARRIVAL          @"towing_arrival"
 #define TOWING_START            @"towing_start"
